@@ -1,0 +1,84 @@
+<a href="../adduser">add user</a>
+<div class="container-fluid">
+  <table mat-table [dataSource]="users" class="table table-bordered table-responsive table-bordered-dark">
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef>avatar</th>
+      <td mat-cell *matCellDef="let ok"><img width="70" height="70" class="img-fluid" src="data:image/jpeg;base64,{{ok.avatar}}" alt=""></td>
+    </ng-container>
+    <ng-container matColumnDef="profil">
+      <th mat-header-cell *matHeaderCellDef>profil</th>
+      <td mat-cell *matCellDef="let ok"> {{ok.profil.libelle}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>nom</th>
+      <td mat-cell *matCellDef="let ok"> {{ok.nom}} </td>
+    </ng-container>
+    <ng-container matColumnDef="prenom">
+      <th mat-header-cell *matHeaderCellDef>prenom</th>
+      <td mat-cell *matCellDef="let ok"> {{ok.prenom}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>email</th>
+      <td mat-cell *matCellDef="let ok"> {{ok.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="adresse">
+      <th mat-header-cell *matHeaderCellDef>adresse</th>
+      <td mat-cell *matCellDef="let ok"> {{ok.adresse}} </td>
+    </ng-container>
+    <ng-container matColumnDef="detail">
+      <th mat-header-cell *matHeaderCellDef>detail</th>
+      <td mat-cell *matCellDef="let ok">
+        <button mat-mini-fab color="primary" (click)="detail(ok)"><mat-icon>menu</mat-icon></button>
+        <div *ngIf="tab" id="detail{{ok.id}}" style="display: none">
+          <p>NOM: {{ tab.nom }}</p>
+          <p>PRENOM: {{ tab.prenom }}</p>
+          <p>LOGIN:
+            {{ tab.login }}</p>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>update</th>
+      <td mat-cell *matCellDef="let ok">
+        <button mat-raised-button color="accent" id="btn{{ok.id}}" (click)="update(ok)">update</button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>delete</th>
+      <td mat-cell *matCellDef="let ok">
+        <button mat-fab color="warn" (click)="deleteUser(ok)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="colonne"></tr>
+    <tr mat-row *matRowDef="let row; columns: colonne;"></tr>
+  </table>
+  <div class="d-flex justify-content-center">
+    <mat-paginator [length]="5"
+                   [pageIndex]=""
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[1, 2, 3, 4, 5]"
+                   (page)="pageEvent = getServerData($event)">
+
+    </mat-paginator>
+  </div>
+  <div id="update" style="display: none">
+    <div *ngIf="cour">
+      <label for="login" id="login">login</label><input type="text" [(ngModel)]="login" value="{{cour.login}}">
+      <label for="nom" id="nom">nom</label><input type="text" [(ngModel)]="nom" value="{{cour.nom}}">
+      <label for="prenom" id="prenom">prenom</label><input type="text" [(ngModel)]="prenom" value="{{cour.prenom}}">
+      <label for="password" id="password">password</label><input type="password" [(ngModel)]="password">
+      <label for="email" id="email">email</label><input type="text" [(ngModel)]="email" value="{{cour.email}}">
+      <label for="adresse" id="adresse">adresse</label><input type="text" [(ngModel)]="adresse" value="{{cour.adresse}}">
+      <mat-label>genre</mat-label>
+      <select [(ngModel)]="genre">
+        <option value="M">masculin</option>
+        <option value="F">feminin</option>
+      </select>
+      <mat-label>avatar</mat-label>
+      <input type="file" [(ngModel)]="avatar" (change)="onSelectFile($event)">
+      <label for="telephone" id="telephone">telephone</label><input type="text" [(ngModel)]="telephone" value="{{cour.telephone}}">
+    </div>
+  </div>
+  <p id="message">{{message}}</p>
+</div>
+

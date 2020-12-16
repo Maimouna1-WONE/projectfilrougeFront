@@ -1,0 +1,13 @@
+<div id="addprofil" style="display: none">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" type="text" formControlName="libelle" placeholder="libelle" >
+      <div *ngIf="submitted && f.libelle.errors" class="input_alert">
+        <div *ngIf="f.libelle.errors.required">libelle is required</div>
+      </div>
+    </div>
+    <button type="submit">Add</button>
+  </form>
+</div>
+<p id="message" style="display: none">{{message}}</p>
+<a href="profil">retour</a>
