@@ -18,6 +18,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AddprofilComponent } from './addprofil/addprofil.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import {materialModule} from './design/material.module';
+import { PromoComponent } from './promo/promo.component';
+import { ReferentielComponent } from './referentiel/referentiel.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {materialModule} from './design/material.module';
     ProfilComponent,
     NavbarComponent,
     AddprofilComponent,
-    AdduserComponent
+    AdduserComponent,
+    PromoComponent,
+    ReferentielComponent
   ],
   imports: [
     BrowserModule,

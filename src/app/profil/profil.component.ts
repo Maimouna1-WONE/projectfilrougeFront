@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProfilService} from '../services/profil.service';
 import {Profil} from '../models/profil';
-import {concat} from 'rxjs';
-import { FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PageEvent} from '@angular/material/paginator';
-
+// tslint:disable-next-line:no-unused-expression label-position
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -14,7 +12,7 @@ import {PageEvent} from '@angular/material/paginator';
 export class ProfilComponent implements OnInit {
   constructor(private profilservice: ProfilService, private router: Router) {
   }
-
+  libelle: string;
   page = 1;
   count = 0;
   profils = [];
@@ -23,7 +21,7 @@ export class ProfilComponent implements OnInit {
   public inputmodifie: string;
   message: string;
   colonne: string[] = ['libelle', 'liste', 'update', 'delete'];
-  colonneliste: string[] = ['#', 'nom', 'prenom', 'login'];
+  colonneliste: string[] = ['#', 'nom', 'prenom', 'login', 'avatar'];
   pageEvent: PageEvent;
   pageIndex: number;
   pageSize: number;
@@ -55,6 +53,9 @@ export class ProfilComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getUsersByProfil(profil: Profil) {
     // @ts-ignore
+    const liste = document.getElementById('liste');
+    liste.style.display = 'block';
+    this.libelle = profil.libelle;
     this.profilservice.getUsersProfil(profil.id).subscribe(
       res => {
         this.usersprofil = res['users'];

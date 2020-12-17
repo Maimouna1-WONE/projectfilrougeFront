@@ -1,19 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">Suivi Apprenants</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a routerLink="home" class="nav-link active" aria-current="page" href="#">Users</a>
+          <a routerLink="home" class="nav-link" routerLinkActive="active" aria-current="page" href="#">Users</a>
         </li>
         <li class="nav-item">
-          <a routerLink="profil" class="nav-link">Profils</a>
+          <a routerLink="profil" class="nav-link" routerLinkActive="active">Profils</a>
         </li>
         <li class="nav-item">
-          <a routerLink="login_check" class="nav-link" (click)="deconnexion()">Deconnexion</a>
+          <a routerLink="promo" class="nav-link" routerLinkActive="active">Promos</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="login_check" class="nav-link" routerLinkActive="active" (click)="deconnexion()">Deconnexion</a>
         </li>
       </ul>
     </div>

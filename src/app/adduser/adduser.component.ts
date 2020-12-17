@@ -70,7 +70,6 @@ export class AdduserComponent implements OnInit {
     user.append('avatar', this.avatar);
     this.userservice.addUser(user).subscribe(
       res => {
-        //console.log(res);
         this.message = 'ok';
       }
       );
@@ -78,14 +77,6 @@ export class AdduserComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSelectFile(event) {
     if (event.target.files.length > 0) {
-      // tslint:disable-next-line:prefer-const
-      //let reader = new FileReader();
-      //reader.readAsDataURL(event.target.files[0]); // read file as data url
-      // tslint:disable-next-line:no-shadowed-variable
-      /*reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      };*/
-      // @ts-ignore
       this.avatar = event.target.files[0];
     }
   }

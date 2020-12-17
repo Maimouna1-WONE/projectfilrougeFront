@@ -1,6 +1,8 @@
 .container-fluid{
-  background-image: url("src/assets/bg/images.jpeg");
+  background: linear-gradient(to right, transparent, mistyrose),
+  url("https://mdn.mozillademos.org/files/15525/critters.png");
   background-size: cover;
   height: 100%;
   width: 100%;
 }
+

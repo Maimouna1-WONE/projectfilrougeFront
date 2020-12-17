@@ -30,6 +30,7 @@
     "datatables.net-dt": "^1.10.20",
     "jquery": "^3.5.1",
     "jw-angular-pagination": "^1.2.0",
+    "material-icons": "^0.5.1",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

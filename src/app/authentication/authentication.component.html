@@ -1,24 +1,29 @@
 <div class="position-absolute top-50 start-50 translate-middle">
+  <h1>Login Form</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group mb-3">
-      <mat-label>Enter your login </mat-label>
-      <label>
-        <input [ngClass]="{ 'is-invalid': submitted && f.login.errors }" matInput type="text" formControlName="login" placeholder="Login" >
-      </label>
+    <div class="form-group mb-5">
+      <mat-form-field appearance="legacy">
+        <mat-label>Enter your login</mat-label>
+        <input matInput placeholder="login" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" formControlName="login">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
       <div *ngIf="submitted && f.login.errors" class="input_alert">
         <div *ngIf="f.login.errors.required">Username is required</div>
       </div>
     </div>
-    <div class="form-group mb-3">
-      <mat-label>Enter your password </mat-label>
-      <label>
-        <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }" matInput type="password" formControlName="password" placeholder="Password" >
-      </label>
+    <div class="form-group mb-5">
+      <mat-form-field appearance="legacy">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
       <div *ngIf="submitted && f.password.errors" class="input_alert">
         <div *ngIf="f.password.errors.required">le mot de passe est obligatoire</div>
       </div>
     </div>
-    <div class="form-group mb-3">
+    <div class="form-group mb-5 m-5">
       <button mat-raised-button color="primary" type="submit">CONNEXION</button>
     </div>
     <div *ngIf="error" class="alert alert-danger text-danger">{{error}}</div>

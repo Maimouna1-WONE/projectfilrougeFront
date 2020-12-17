@@ -1,12 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import {AuthenticationService } from '../authentication/authentication.service';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 import {UserService} from '../services/user.service';
 import {ProfilService} from '../services/profil.service';
 import {User} from '../models/user';
 import {PageEvent} from '@angular/material/paginator';
-import {Profil} from '../models/profil';
 
 
 @Component({
@@ -16,7 +14,6 @@ import {Profil} from '../models/profil';
 })
 export class HomeComponent implements OnInit{
   constructor(
-    private sanitizer: DomSanitizer,
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private userservice: UserService,
@@ -50,8 +47,8 @@ export class HomeComponent implements OnInit{
   password: string; adresse: string;
   genre: string; telephone: string; email: string; avatar: any;
   // tslint:disable-next-line:typedef
-  private ava: any;
-
+  info: any;
+  hide = true;
   // tslint:disable-next-line:typedef
   logout()
   {
@@ -75,7 +72,7 @@ export class HomeComponent implements OnInit{
 // tslint:disable-next-line:typedef
   getUserInfo()
   {
-    const info = JSON.parse(localStorage.getItem('currentUserInfo'));
+    this.info = JSON.parse(localStorage.getItem('currentUserInfo'));
   }
   // tslint:disable-next-line:typedef use-lifecycle-interface
   ngOnInit()
@@ -146,8 +143,6 @@ export class HomeComponent implements OnInit{
     }
     if (!this.avatar){
       this.avatar = user.avatar;
-    }else{
-      this.avatar = this.onSelectFile(event);
     }
     if (!this.telephone){
       this.telephone = user.telephone;
@@ -156,6 +151,7 @@ export class HomeComponent implements OnInit{
     $(btn).on('click', btn, (e) => {
       const formdata = new FormData();
       // @ts-ignore
+      formdata.append('login', this.login);
       formdata.append('password', this.password);
       formdata.append('prenom', this.prenom);
       formdata.append('nom', this.nom);
@@ -177,9 +173,8 @@ export class HomeComponent implements OnInit{
   }
   // tslint:disable-next-line:typedef
   onSelectFile(event) {
-    if (event.target.files.length > 0)
-    {
-      return  event.target.files[0];
+    if (event.target.files.length > 0) {
+        this.avatar = event.target.files[0];
     }
   }
 }

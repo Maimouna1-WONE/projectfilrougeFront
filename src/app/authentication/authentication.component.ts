@@ -16,6 +16,7 @@ export class AuthenticationComponent implements OnInit
   returnUrl: string;
   error = '';
   dtee: User;
+  hide = true;
 
   // tslint:disable-next-line:max-line-length
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService )
