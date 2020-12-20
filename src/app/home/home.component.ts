@@ -5,6 +5,9 @@ import {UserService} from '../services/user.service';
 import {ProfilService} from '../services/profil.service';
 import {User} from '../models/user';
 import {PageEvent} from '@angular/material/paginator';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {DetailuserComponent} from '../detailuser/detailuser.component';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 
 @Component({
@@ -18,14 +21,14 @@ export class HomeComponent implements OnInit{
     private authenticationService: AuthenticationService,
     private userservice: UserService,
     private profilservice: ProfilService,
-    private router: Router) {
+    private router: Router, private flashmessage: FlashMessagesService,
+    private dialog: MatDialog) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
   page = 1;
   count = 0;
   loading = false;
   users = [] ;
-  tab = [];
   user: User =
     {
       prenom: '',
@@ -89,17 +92,13 @@ export class HomeComponent implements OnInit{
   // tslint:disable-next-line:typedef
   detail(user: User)
   {
-    const det = document.getElementById('detail' + user.id);
-    det.style.display = 'block';
-    this.userService.getbyId(user.id).subscribe(
-      res => {
-        // @ts-ignore
-        this.tab = res;
-      },
-      error => {
-        console.log('error');
-      }
-    );
+    this.router.navigate(['detailuser', user.id]);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.data = user;
+    this.dialog.open(DetailuserComponent, dialogConfig);
   }
   // tslint:disable-next-line:typedef
   deleteUser(user: User) {
@@ -109,7 +108,7 @@ export class HomeComponent implements OnInit{
       paragraphe.style.display = 'block';
       this.userService.deleteOneUser(user.id).subscribe(
         res => {
-          this.router.navigate(['home']);
+          this.refresh();
           this.message = 'delete ok';
         },
         error => {
@@ -163,10 +162,13 @@ export class HomeComponent implements OnInit{
       formdata.append('avatar', this.avatar);
       this.userservice.updateOneProfil(user.id, formdata).subscribe(
         res => {
-          console.log(res);
+          this.flashmessage.show('Modification reussie', {cssClass: 'alert-success', timeout: 1000});
+          this.refresh();
+          div.style.display = 'none';
         },
         error => {
-          console.log(error);
+          this.flashmessage.show('echec', {cssClass: 'alert-danger', timeout: 1000});
+          this.refresh();
         }
       );
     });
@@ -176,6 +178,16 @@ export class HomeComponent implements OnInit{
     if (event.target.files.length > 0) {
         this.avatar = event.target.files[0];
     }
+  }
+  // tslint:disable-next-line:typedef
+  refresh(){
+    this.userService.getAll(0)
+      .subscribe(
+        res => {
+          this.users = res;
+        },
+        error => console.log('error de recuperation users')
+      );
   }
 }
 

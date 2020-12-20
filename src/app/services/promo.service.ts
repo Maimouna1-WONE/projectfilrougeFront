@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Promo} from '../models/promo';
+import {Profil} from '../models/profil';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class PromoService {
   {
     // @ts-ignore
     return this.http.post('/api/admin/promos', data);
+  }
+  getApprenant(): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/principal`);
   }
 }

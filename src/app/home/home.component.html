@@ -1,5 +1,6 @@
 <a href="../adduser"><span class="material-icons">person_add_alt_1</span></a>
 <div class="container-fluid">
+  <flash-messages></flash-messages>
   <table mat-table [dataSource]="users" class="table table-bordered table-responsive table-bordered-dark"  matSort matSortStart="desc">
     <ng-container matColumnDef="avatar">
       <th mat-header-cell *matHeaderCellDef>Avatar</th>
@@ -28,13 +29,7 @@
     <ng-container matColumnDef="detail">
       <th mat-header-cell *matHeaderCellDef>Detail</th>
       <td mat-cell *matCellDef="let ok">
-        <button mat-mini-fab color="primary" (click)="detail(ok)"><span class="material-icons">list</span></button>
-        <div *ngIf="tab" id="detail{{ok.id}}" style="display: none">
-          <p>NOM: {{ tab.nom }}</p>
-          <p>PRENOM: {{ tab.prenom }}</p>
-          <p>LOGIN:
-            {{ tab.login }}</p>
-        </div>
+        <button mat-mini-fab color="primary" (click)="detail(ok)"><span class="material-icons">child_care</span></button>
       </td>
     </ng-container>
     <ng-container matColumnDef="update">
@@ -62,63 +57,54 @@
     </mat-paginator>
   </div>
   <div id="update" style="display: none">
-    <div *ngIf="cour" class="bg-secondary m-2 rounded border border-info">
-      <div class="row">
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="profil" id="profil">Profil</label>
-            <label>{{cour.profil.libelle}}</label>
-          </mat-form-field>
+      <div class="row" *ngIf="cour">
+        <div class="col-12">
+            <label for="profil" id="profil">Modification {{cour.profil.libelle}}</label>
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="login" id="login">Login</label><input type="text" [(ngModel)]="login" value="{{cour.login}}">
-          </mat-form-field>
+        <div class="form-group col-3">
+            <label for="login" id="login">Login</label>
+            <input type="text" [(ngModel)]="login" value="{{cour.login}}">
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="password" id="password">Password</label><input matInput [type]="hide ? 'password' : 'text'" type="password" [(ngModel)]="password" value="pass_1234">
+        <div class="form-group col-3">
+            <label for="password" id="password">Password</label>
+            <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" placeholder="password">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-          </mat-form-field>
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="nom" id="nom">Nom</label><input type="text" [(ngModel)]="nom" value="{{cour.nom}}">
-          </mat-form-field>
+        <div class="form-group col-3">
+            <label for="nom" id="nom">Nom</label>
+            <input type="text" [(ngModel)]="nom" value="{{cour.nom}}">
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="prenom" id="prenom">Prenom</label><input type="text" [(ngModel)]="prenom" value="{{cour.prenom}}">
-          </mat-form-field>
+        <div class="form-group col-3">
+            <label for="prenom" id="prenom">Prenom</label>
+            <input type="text" [(ngModel)]="prenom" value="{{cour.prenom}}">
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="email" id="email">Email</label><input type="text" [(ngModel)]="email" value="{{cour.email}}">
-          </mat-form-field>
+        <div class="form-group col-3">
+            <label for="email" id="email">Email</label>
+            <input type="text" [(ngModel)]="email" value="{{cour.email}}">
         </div>
-        <div class="col-3">
-          <mat-form-field appearance="legacy">
-            <label for="adresse" id="adresse">Adresse</label><input type="text" [(ngModel)]="adresse" value="{{cour.adresse}}">
-          </mat-form-field>
+        <div class="form-group col-3">
+            <label for="adresse" id="adresse">Adresse</label>
+            <input type="text" [(ngModel)]="adresse" value="{{cour.adresse}}">
         </div>
-        <div class="col-3">
-          <label for="telephone" id="telephone">Telephone</label><input type="text" [(ngModel)]="telephone" value="{{cour.telephone}}">
+        <div class="form-group col-3">
+          <label for="telephone" id="telephone">Telephone</label>
+          <input type="text" [(ngModel)]="telephone" value="{{cour.telephone}}">
         </div>
-        <div class="col-3">
+        <div class="form-group col-3">
           <mat-label>Genre</mat-label>
           <select [(ngModel)]="genre">
             <option value="M">Masculin</option>
             <option value="F">Feminin</option>
           </select>
         </div>
-        <div class="col-3">
+        <div class="form-group col-3">
           <mat-label>Avatar</mat-label>
           <input type="file" [(ngModel)]="avatar" (change)="onSelectFile($event)">
+          <img class="img-thumbnail" width="50%" height="50%" src="data:image/jpeg;base64,{{avatar}}" alt="imgUser">
         </div>
       </div>
-    </div>
   </div>
   <h1 class="text-info" id="message">{{message}}</h1>
 </div>

@@ -11,6 +11,8 @@ import {AddprofilComponent} from './addprofil/addprofil.component';
 import {AdduserComponent} from './adduser/adduser.component';
 import {PromoComponent} from './promo/promo.component';
 import {ReferentielComponent} from './referentiel/referentiel.component';
+import {DetailuserComponent} from './detailuser/detailuser.component';
+import {AddpromoComponent} from './addpromo/addpromo.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,10 +20,11 @@ const routes: Routes = [
   {path: 'formateur', component: FormateurComponent, canActivate: [AuthGuard]},
   {path: 'apprenant', component: ApprenantComponent, canActivate: [AuthGuard]},
   {path: 'referentiel', component: ReferentielComponent, canActivate: [AuthGuard]},
+  {path: 'addpromo', component: AddpromoComponent, canActivate: [AuthGuard]},
   {path: 'adduser', component: AdduserComponent, canActivate: [AuthGuard]},
   {path: 'addprofil', component: AddprofilComponent, canActivate: [AuthGuard]},
   {path: 'promo', component: PromoComponent, canActivate: [AuthGuard]},
-  // {path: 'users/:id', component: DetailuserComponent, canActivate: [AuthGuard]},
+  // {path: 'detailuser/:id', component: DetailuserComponent, canActivate: [AuthGuard]},
   {path: 'profil', component: ProfilComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login_check', component: AuthenticationComponent},

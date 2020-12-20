@@ -3,49 +3,49 @@
       <mat-label>login</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.login.errors }" type="text" formControlName="login" placeholder="login" >
       <div *ngIf="submitted && f.login.errors" class="input_alert">
-        <div *ngIf="f.login.errors.required">login is required</div>
+        <div *ngIf="f.login.errors.required" class="alert-danger">login is required</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>password</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }" type="password" formControlName="password" placeholder="password" >
       <div *ngIf="submitted && f.password.errors" class="input_alert">
-        <div *ngIf="f.password.errors.required">password is required</div>
+        <div *ngIf="f.password.errors.required" class="alert-danger">Le password doit etre requis</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>nom</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" type="text" pattern="^[A-Z]+$" formControlName="nom" placeholder="nom" >
       <div *ngIf="submitted && f.nom.errors" class="input_alert">
-        <div *ngIf="f.nom.errors.required">nom is required</div>
+        <div *ngIf="f.nom.errors.required || f.nom.errors.pattern" class="alert-danger">Le nom doit etre ecrit correctement (Ex: ABBBB)</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>prenom</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" type="text" pattern="^[A-Z][a-z]+$" formControlName="prenom" placeholder="prenom" >
       <div *ngIf="submitted && f.prenom.errors" class="input_alert">
-        <div *ngIf="f.prenom.errors.required">prenom is required</div>
+        <div *ngIf="f.prenom.errors.required || f.prenom.errors.pattern" class="alert-danger">Le prenom doit etre ecrit correctement (Ex: Abbbb)</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>adresse</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }" type="text" formControlName="adresse" placeholder="adresse" >
       <div *ngIf="submitted && f.adresse.errors" class="input_alert">
-        <div *ngIf="f.adresse.errors.required">adresse is required</div>
+        <div *ngIf="f.adresse.errors.required" class="alert-danger">Indiquer votre adresse</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>telephone</mat-label>
       <input [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" type="tel" pattern="^7[7|6|8|0][0-9]{7}$" formControlName="telephone" placeholder="telephone" >
       <div *ngIf="submitted && f.telephone.errors" class="input_alert">
-        <div *ngIf="f.telephone.errors.required">telephone is required</div>
+        <div *ngIf="f.telephone.errors.required  || f.telephone.errors.pattern" class="alert-danger">Le nom doit etre ecrit correctement (Ex: 77/76/78*******)</div>
       </div>
     </div>
     <div class="form-group">
       <mat-label>email</mat-label>
-      <input [ngClass]="{ 'is-invalid': submitted && f.email.errors }" type="email" formControlName="email" placeholder="email" >
+      <input [ngClass]="{ 'is-invalid': submitted && f.email.errors }" type="email" formControlName="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
       <div *ngIf="submitted && f.email.errors" class="input_alert">
-        <div *ngIf="f.email.errors.required">email is required</div>
+        <div *ngIf="f.email.errors.required || f.email.errors.pattern" class="alert-danger">Format email(Ex: rty21&@dfgh.dfg)</div>
       </div>
     </div>
     <div class="form-group">
@@ -54,7 +54,7 @@
         <option *ngFor="let prof of allprofil" value="{{ prof.id }}">{{ prof.libelle }}</option>
       </select>
       <div *ngIf="submitted && f.email.errors" class="input_alert">
-        <div *ngIf="f.profil.errors.required">profil is required</div>
+        <div *ngIf="f.profil.errors.required" class="alert-danger">Donner le profil</div>
       </div>
     </div>
     <div class="form-group">
@@ -64,7 +64,7 @@
         <option value="F">feminin</option>
       </select>
       <div *ngIf="submitted && f.email.errors" class="input_alert">
-        <div *ngIf="f.genre.errors.required">genre is required</div>
+        <div *ngIf="f.genre.errors.required" class="alert-danger">genre is required</div>
       </div>
     </div>
    <div class="form-group">

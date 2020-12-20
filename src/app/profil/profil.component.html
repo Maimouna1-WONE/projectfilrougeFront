@@ -1,4 +1,5 @@
 <a href="addprofil"><span class="material-icons">person_add_alt_1</span></a>
+<flash-messages></flash-messages>
 <table mat-table [dataSource]="profils" class="table table-bordered table-responsive table-bordered-dark">
   <ng-container matColumnDef="libelle">
     <th mat-header-cell *matHeaderCellDef>Libelle</th>
@@ -13,8 +14,8 @@
   <ng-container matColumnDef="update">
     <th mat-header-cell *matHeaderCellDef>Update</th>
     <td mat-cell *matCellDef="let pro">
-      <button class="border border-0" id="btn{{pro.id}}" (click)="editProfil(pro)"><span class="material-icons" style="color: hotpink">edit</span></button>
-      <label id="label" style="display: none">Libelle</label><input type="text" style="display: none" [(ngModel)]="inputmodifie" id="input{{pro.id}}">
+      <button class="border border-0" id="btn{{pro.id}}" (click)="editProfil(pro)" ><span class="material-icons" style="color: hotpink">edit</span></button>
+      <label id="label" style="display: none">Libelle</label><input type="text" style="display: none" (keydown.enter)="update(pro)" [(ngModel)]="inputmodifie" id="input{{pro.id}}">
     </td>
   </ng-container>
   <ng-container matColumnDef="delete">

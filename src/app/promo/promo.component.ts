@@ -5,6 +5,7 @@ import {Promo} from '../models/promo';
 import {Referentiel} from '../models/referentiel';
 import {ReferentielService} from '../services/referentiel.service';
 import {Router} from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-promo',
@@ -18,17 +19,18 @@ export class PromoComponent implements OnInit {
   pageIndex: number;
   pageSize: number;
   referentiel: Referentiel;
-  colonne: string[] = ['id', 'libelle', 'lieu', 'langue', 'description', 'reference_agate', 'date_debut', 'date_fin', 'referentiel', 'avatar', 'delete'];
-  private message: string;
-
-  constructor(private promoservice: PromoService, private referentielservice: ReferentielService, private router: Router) { }
+  colonne: string[] = ['id', 'libelle', 'lieu', 'langue', 'description', 'reference_agate', 'date_debut', 'date_fin', 'referentiel', 'avatar', 'delete', 'liste'];
+  public message: string;
+  principal: Promo[];
+  constructor(private promoservice: PromoService,
+              private referentielservice: ReferentielService,
+              private flashmessage: FlashMessagesService) { }
 
   ngOnInit(): void {
     this.promoservice.getAll(0)
       .subscribe(
         res => {
           this.promos = res;
-          console.log(res[0].dateDebut);
         },
         error => console.log('error de recuperation promos')
       );
@@ -49,9 +51,6 @@ export class PromoComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   detailRef(ref: Referentiel, promo: Promo) {
-    //const div = document.getElementById('deter' + promo.id);
-    //console.log(div);
-    //div.style.display = 'block';
     this.referentielservice.getbyId(ref.id).subscribe(
       res => {
         this.referentiel = res;
@@ -70,12 +69,35 @@ export class PromoComponent implements OnInit {
       this.promoservice.deleteOnePromo(promo.id).subscribe(
         // tslint:disable-next-line:no-shadowed-variable
         res => {
-          this.router.navigate(['promo']);
-          this.message = 'delete ok';
+          this.flashmessage.show('Suppression reussie', {cssClass: 'alert-success', timeout: 1000});
+          this.refresh();
         },
         error => {
-          this.message = 'error delete';
+          this.flashmessage.show(error, {cssClass: 'alert-danger', timeout: 1000});
+          this.refresh();
         });
     }
+  }
+  // tslint:disable-next-line:typedef
+  getApprenant(){
+    this.promoservice.getApprenant().subscribe(
+      res => {
+        this.principal = res;
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  // tslint:disable-next-line:typedef
+  refresh(){
+    this.promoservice.getAll(0)
+      .subscribe(
+        res => {
+          this.promos = res;
+        },
+        error => console.log('error de recuperation promos')
+      );
   }
 }

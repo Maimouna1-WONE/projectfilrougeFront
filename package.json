@@ -24,6 +24,7 @@
     "@angular/router": "~10.2.0",
     "@auth0/angular-jwt": "^5.0.2",
     "angular-datatables": "^10.0.0",
+    "angular2-flash-messages": "^3.0.1",
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^5.0.0-beta1",
     "datatables.net": "^1.10.20",

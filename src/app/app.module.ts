@@ -20,6 +20,9 @@ import { AdduserComponent } from './adduser/adduser.component';
 import {materialModule} from './design/material.module';
 import { PromoComponent } from './promo/promo.component';
 import { ReferentielComponent } from './referentiel/referentiel.component';
+import { DetailuserComponent } from './detailuser/detailuser.component';
+import {FlashMessagesModule} from 'angular2-flash-messages';
+import { AddpromoComponent } from './addpromo/addpromo.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { ReferentielComponent } from './referentiel/referentiel.component';
     AddprofilComponent,
     AdduserComponent,
     PromoComponent,
-    ReferentielComponent
+    ReferentielComponent,
+    DetailuserComponent,
+    AddpromoComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { ReferentielComponent } from './referentiel/referentiel.component';
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-    materialModule
+    materialModule,
+    FlashMessagesModule.forRoot()
 
   ],
   providers: [

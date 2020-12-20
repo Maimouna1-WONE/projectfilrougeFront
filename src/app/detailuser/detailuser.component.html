@@ -1,0 +1,32 @@
+<div class="row" *ngIf="tab">
+  <div class="col-12">
+  <button (click)="close()" type="submit"><span class="material-icons">close</span></button>
+  </div>
+  <div class="col-12">
+    <img class="img-thumbnail" src="data:image/jpeg;base64,{{tab.avatar}}" alt="alt">
+  </div>
+  <div class="col-6">
+    <mat-label>NOM: </mat-label><label for="">{{ tab.nom }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>PRENOM: </mat-label><label for="">{{ tab.prenom }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>LOGIN: </mat-label><label for="">{{ tab.login }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>PROFIL: </mat-label><label for="">{{ tab.profil.libelle }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>TELEPHONE: </mat-label><label for="">{{ tab.telephone }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>EMAIL: </mat-label><label for="">{{ tab.email }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>ADRESSE: </mat-label><label for="">{{ tab.adresse }}</label>
+  </div>
+  <div class="col-6">
+    <mat-label>GENRE: </mat-label><label for="">{{ tab.genre }}</label>
+  </div>
+</div>
