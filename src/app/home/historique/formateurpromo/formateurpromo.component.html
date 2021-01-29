@@ -1,0 +1,15 @@
+<h3>Liste des apprenants de la Promo</h3>
+<p-table [value]="formateurs">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-form>
+    <tr>
+      <td>{{form.nom}}</td>
+      <td>{{form.prenom}}</td>
+    </tr>
+  </ng-template>
+</p-table>

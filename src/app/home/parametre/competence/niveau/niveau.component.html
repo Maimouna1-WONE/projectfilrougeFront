@@ -1,0 +1,24 @@
+<nav class="row navbar navbar-expand bg-light navbar-light border border-0">
+  <ul class="navbar-nav">
+    <li class="nav-item col-4 rounded-3" *ngFor="let n of competence.niveau; index as i;">
+      <a class="nav-link" (click)="getniveau(i)" id="{{i}}">Niveau {{i+1}}</a>
+    </li>
+  </ul>
+</nav>
+<label for="" class="form-label p-2">{{competence.libelle}}</label>
+
+<div class="row" *ngIf="niveau">
+  <div class="col-6 bg-light">
+    <ul class="list-group">
+      <h3 class="form-label text-info">Groupes d'actions à realiser</h3>
+      <label for="" >{{niveau.action}}</label>
+    </ul>
+  </div>
+  <div class="col-6 bg-light">
+    <ul class="list-group">
+      <h3 class="form-label text-info">Critéres d'evaluation</h3>
+      <label for="">{{niveau.critereEvaluation}}</label>
+    </ul>
+  </div>
+</div>
+

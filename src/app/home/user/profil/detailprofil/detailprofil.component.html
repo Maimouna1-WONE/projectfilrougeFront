@@ -1,0 +1,23 @@
+<!--<h2 class="text-primary">Liste des {{Users.libelle}}</h2>-->
+  <p-table [columns]="scrollableCols" [value]="Users['users']" [scrollable]="true" scrollHeight="250px" frozenWidth="300px">
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col *ngFor="let col of columns" style="width:300px">
+      </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          {{customer[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+

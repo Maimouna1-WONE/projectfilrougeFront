@@ -1,0 +1,81 @@
+<h2 class="text-center">Ajouter un referentiel</h2>
+<hr>
+<flash-messages></flash-messages>
+<form class="form-control" (ngSubmit)="OnSubmit()" [formGroup]="addForm">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Libelle</label>
+        <input  class="form-control" type="text" formControlName="libelle">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label" >Presentation</label>
+        <textarea class="form-control" formControlName="presentation" ></textarea>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Groupe de Competences</label>
+        <!--<mat-form-field>
+        <mat-label>Groupe de Competences</mat-label>
+        <mat-select [formControlName]="'grpcompetence'" multiple>
+          <mat-select-trigger >
+            <mat-chip-list>
+              <mat-chip *ngFor="let topping of toppingsControl.value"
+                        [removable]="true" (removed)="onToppingRemoved(topping)">
+                {{ topping }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-select-trigger>
+          <mat-option *ngFor="let topping of grpcompetences" [value]="topping.id">{{topping.libelle}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <br/>
+        {{ toppingsControl.value | json }}-->
+        <mat-form-field>
+          <mat-label>Groupes de Competences</mat-label>
+          <mat-select [formControl]="toppingsControl" multiple>
+
+            <mat-select-trigger>
+              <mat-chip-list>
+                <mat-chip *ngFor="let topping of toppingsControl.value"
+                          [removable]="true" (removed)="onToppingRemoved(topping)">
+                  {{ topping }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </mat-select-trigger>
+
+            <mat-option *ngFor="let topping of grpcompetences" [value]="topping.id">{{topping.libelle}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Programme</label>
+        <input type="file" class="form-control" formControlName="programme" (change)="onSelectFile($event)">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label" >Criteres d'evaluation</label>
+        <textarea class="form-control" formControlName="critereevaluation"></textarea>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label" >Criteres d'admission</label>
+        <textarea class="form-control" formControlName="critereadmission"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row btn-sm text-center">
+    <button type="submit" class="btn btn-info">Soumettre</button>
+  </div>
+</form>
+

@@ -1,0 +1,14 @@
+<h1 class="text-danger">Ajout d'un nouveau profil de sortie</h1>
+<hr>
+<flash-messages></flash-messages>
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="form-control">
+  <div class="form-group">
+    <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" type="text" formControlName="libelle" placeholder="libelle" >
+    <div *ngIf="submitted && f.libelle.errors" class="alert-danger">
+      <div *ngIf="f.libelle.errors.required">libelle is required</div>
+    </div>
+  </div>
+  <div class="btn-sm text-center">
+    <button type="submit" class="btn btn-info">Add</button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<h2 class="text-center">Ajouter une Competence</h2>
+<hr>
+<flash-messages></flash-messages>
+
+
+<form class="form-control" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <label for="" class="form-label">Libelle</label>
+        <textarea class="form-control" type="text" formControlName="libelle"></textarea>
+        <label for="" class="form-label">Description</label>
+        <textarea class="form-control" type="text" formControlName="description"></textarea>
+        <div formArrayName="niveau" class="form-group">
+          <div *ngFor="let skill of CompetenceNiveaux().controls; let skillIndex=index" style="border: red;">
+            <div [formGroupName]="skillIndex">
+              {{skillIndex}}
+              <label for="" class="form-label">Libelle</label>
+              <input type="text" formControlName="libelle" class="form-control"/>
+              <label for="" class="form-label">Action</label>
+              <textarea type="text" formControlName="action" class="form-control"></textarea>
+              <label for="">Critere Evaluation</label>
+              <textarea type="text" formControlName="critereEvaluation" class="form-control"></textarea>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-primary" (click)="addCompetenceNiveau()">Add Niveau</button>
+        </div>
+  <p>
+    <button type="submit" class="btn btn-info">Soumettre</button>
+  </p>
+</form>
+{{this.addForm.value | json}}

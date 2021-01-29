@@ -1,0 +1,10 @@
+.overflow-auto{
+  max-width: 260px;
+  max-height: 300px;
+}
+span{
+  float: right;
+}
+a{
+  float: right;
+}

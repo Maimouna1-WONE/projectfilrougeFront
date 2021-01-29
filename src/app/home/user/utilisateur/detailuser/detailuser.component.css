@@ -1,0 +1,13 @@
+button{
+  float: right;
+  color: red;
+  border: none;
+}
+div{
+  background-color: ghostwhite;
+}
+img{
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+}

@@ -1,0 +1,22 @@
+
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Referentiel</th>
+      <th scope="col">Formateurs</th>
+      <th scope="col">Apprenants</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pr of principal">
+      <th scope="row">{{pr.id}}</th>
+      <td scope="row">@{{pr.referentiel.libelle}}</td>
+      <td scope="row" *ngFor="let g of pr['groupes']">
+        <div *ngFor="let f of g['formateur']">{{f.nom}} {{f.prenom}}</div>
+      </td>
+      <td scope="row" *ngFor="let g of pr['groupes']">
+        <div *ngFor="let a of g['apprenants']">{{a.nom}} {{a.prenom}}</div>
+      </td>
+    </tr>
+</table>

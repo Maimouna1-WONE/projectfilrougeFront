@@ -1,0 +1,166 @@
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper col-3">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a>pro sidebar</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img *ngIf="!user.avatar; else other" class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+               alt="User picture">
+          <ng-template #other>
+            <img class="img-responsive img-rounded" src="data:image/jpeg;base64,{{user.avatar}}"
+                 alt="User picture">
+          </ng-template>
+        </div>
+        <div class="user-info">
+          <span >
+            <strong class="user-name">{{user.prenom}} {{user.nom}}</strong>
+          </span>
+          <span class="user-role">{{user.profil.libelle}}</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="['/home', 'brief']">
+              <i class="fa fa-newspaper"></i>
+              <span>Brief</span>
+              <span class="badge badge-pill badge-warning">New</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="['/home', 'rendu']">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Rendu</span>
+              <span class="badge badge-pill badge-warning">New</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="['/home', 'explore']">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Explorer</span>
+              <span class="badge badge-pill badge-warning">New</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="['/home', 'forum']">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Forum</span>
+              <span class="badge badge-pill badge-warning">New</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a>
+              <i class="fa fa-cog"></i>
+              <span>Parametres</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'promo']">Promos</a></li>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'referentiel']">Referentiels</a></li>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'grpcompetence']">Groupes de Competences</a></li>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'competence']">Competences</a></li>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'grptag']">Groupes de Tags</a></li>
+                <li class="nav-item"><a class="dropdown-item" [routerLink]="['/home/', 'profilsortie']">Profils de Sorties</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a>
+              <i class="fa fa-address-card"></i>
+              <span>Users</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li class="nav-item">
+                  <a class="dropdown-item" [routerLink]="['/home', 'utilisateur']">Utilisateur</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" [routerLink]="['/home', 'profil']">Profil</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="['/home', 'historique']">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Historique des promos</span>
+            </a>
+          </li>
+          <li class="header-menu">
+            <span>Extra</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>Documentation</span>
+              <span class="badge badge-pill badge-primary">Beta</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-folder"></i>
+              <span>Examples</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      <a href="#">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-pill badge-warning notification">3</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <a routerLink="/login_check" (click)="deconnexion()">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </div>
+  </nav>
+  <!--sidebar-wrapper-->
+  <main class="page-content">
+    <router-outlet></router-outlet>
+  </main>
+  <!--page-content-->
+</div>
+
+

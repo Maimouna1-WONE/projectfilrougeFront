@@ -1,0 +1,115 @@
+<h2 class="text-center mt-5 fw-bold text-info">Ajouter une nouvelle Promotion</h2>
+<hr>
+<form class="form-control" [formGroup]="addForm" (ngSubmit)="OnSubmit()">
+  <div class="row">
+    <div class="col-12">
+      <img src="{{url}}" class="rounded-circle border border-info w-25 h-25" alt="pp">
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="fw-bold form-label">Choix de la langue</label>
+        <select class="form-select" placeholder="--select--" class="form-select" required="required" [formControlName]="'langue'" [ngClass]="{ 'is-invalid': submitted && f.langue.errors }">
+          <option value="francais">Francais</option>
+          <option value="anglais">Anglais</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="fw-bold form-label">Choix de la fabrique</label>
+        <select class="form-select" placeholder="--select--" class="form-select" required="required" [formControlName]="'fabrique'" [ngClass]="{ 'is-invalid': submitted && f.fabrique.errors }">
+          <option value="Sonatel Academy">Sonatel Academy</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="fw-bold form-label">Libelle</label>
+        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" type="text" [formControlName]="'libelle'" placeholder="libelle" >
+        <div *ngIf="submitted && f.libelle.errors" class="input_alert">
+          <div *ngIf="f.libelle.errors.required || f.libelle.errors.required" class="alert-danger">Veillez entrer le libelle</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="fw-bold form-label">Lieu de la promotion</label>
+        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lieu.errors }" type="text" [formControlName]="'lieu'" placeholder="lieu">
+        <div *ngIf="submitted && f.lieu.errors" class="input_alert">
+          <div *ngIf="f.lieu.errors.required || f.lieu.errors.required" class="alert-danger">Veillez entrer le lieu de la promo</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Description</label>
+        <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" type="text" [formControlName]="'description'" placeholder="description"></textarea>
+        <div *ngIf="submitted && f.description.errors" class="input_alert">
+          <div *ngIf="f.description.errors.required || f.description.errors.required" class="alert-danger">Veillez entrer la description de la promo</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Reference Agate</label>
+        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reference_agate.errors }" type="text" [formControlName]="'reference_agate'" placeholder="reference agate">
+        <div *ngIf="submitted && f.reference_agate.errors" class="input_alert">
+          <div *ngIf="f.reference_agate.errors.required || f.reference_agate.errors.required" class="alert-danger">Veillez entrer la reference</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="fw-bold form-label">Date fin</label>
+        <input  class="form-control" type="date"  [ngClass]="{ 'is-invalid': submitted && f.date_fin.errors }" [formControlName]="'date_fin'">
+        <div *ngIf="submitted && f.date_fin.errors" class="input_alert">
+          <div *ngIf="f.date_fin.errors.required || f.date_fin.errors.required" class="alert-danger">Veillez entrer la date de fin</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Referentiel</label>
+        <label class="form-check-label" *ngFor="let ref of referentiels">
+          <input [formControlName]="'referentiel'" type="radio" class="form-check-input" name="referentiel" id="{{ref.id}}" [value]="ref.id">
+          {{ref.libelle}}
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">avatar</label>
+        <input class="form-control" type="file" [formControlName]="'avatar'" (change)="onSelectFile($event)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 form-group" formArrayName="apprenant">
+        <h2>Ajout d'apprenants</h2>
+        <div *ngFor="let skill of promogroupe().controls; let skillIndex=index" style="border: red;">
+          <div [formGroupName]="skillIndex">
+            {{skillIndex}}
+            <div class="row">
+              <div class="col-6">
+                <input type="text" class="form-control" [formControlName]="'app'">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" (click)="addApprenant()">Ajouter des apprenants</button>
+      </div>
+      <div class="col-6">
+        <input type="file" [formControlName]="'document'" (change)="File($event)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button type="submit" class="btn btn-outline-danger">Annuler</button>
+      </div>
+      <div class="col-6">
+        <button type="submit" class="btn btn-info">Soumettre</button>
+      </div>
+    </div>
+  </div>
+</form>
+<p>{{this.addForm.value | json}}</p>
+

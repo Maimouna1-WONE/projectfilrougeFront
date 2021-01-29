@@ -1,0 +1,27 @@
+<div class="row">
+<p-card>
+  <p-header>
+    <div class="row">
+      <div class="col-7 pt-4">{{referentiel.libelle}}</div>
+      <div class="col">
+        <button class="btn btn-sm"><a [routerLink]="['/home/detailreferentiel/',referentiel.id, 'updatereferentiel']" title="modifier ce referentiel"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
+      </div>
+    </div>
+  </p-header>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{referentiel.presentation}}</li>
+    <li class="list-group-item">{{referentiel.programme}}</li>
+    <li class="list-group-item">{{referentiel.critereAdmission}}</li>
+    <li class="list-group-item">{{referentiel.critereEvaluation}}</li>
+  </ul>
+  <p-footer>
+    <p-header>Groupe de Competences</p-header>
+    <select class="form-select">
+      <option value="" *ngFor="let gc of referentiel['groupeCompetence']">{{gc.libelle}}</option>
+    </select>
+  </p-footer>
+</p-card>
+</div>
+<div class="row mt-5">
+<router-outlet></router-outlet>
+</div>

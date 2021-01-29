@@ -1,0 +1,232 @@
+<flash-messages></flash-messages>
+<!--<div class="accordion row mt-5" id="accordion1">
+
+  <div class="accordion-item col-sm-6">
+    <h2 class="accordion-header form-label" id="ref">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#btn" aria-expanded="true" aria-controls="btn">
+        <div class="row">
+          <div class="col-7 pt-4">{{ref.libelle}}</div>
+          <div class="col">
+            <button class="btn btn-sm"><a [routerLink]="['/home/parametre/referentiel', 'updatereferentiel', ref.id]" title="modifier ce referentiel"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
+            <button class="btn btn-sm"><a (click)="deleteRef(ref)"><span class="material-icons" style="color: red" title="supprimer ce referentiel">close</span></a></button>
+          </div>
+        </div>
+      </button>
+    </h2>
+
+    <div id="btn" class="accordion-collapse collapse show" aria-labelledby="ref" data-bs-parent="#accordion1">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="accordion accordion-flush" id="accordion2">
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="ref1">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn2" aria-expanded="false" aria-controls="btn2">
+                    Presentation
+                  </button>
+                </h2>
+                <div id="btn2" class="accordion-collapse collapse" aria-labelledby="ref1" data-bs-parent="#accordion1">
+                  <div class="accordion-body">{{ref.presentation}}</div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="ref3">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn3" aria-expanded="false" aria-controls="btn3">
+                    Programme
+                  </button>
+                </h2>
+                <div id="btn3" class="accordion-collapse collapse" aria-labelledby="ref3" data-bs-parent="#accordion1">
+                  <div class="accordion-body">{{ref.programme}}</div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="ref4">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn4" aria-expanded="false" aria-controls="btn4">
+                    Critere d'evaluation
+                  </button>
+                </h2>
+                <div id="btn4" class="accordion-collapse collapse" aria-labelledby="ref4" data-bs-parent="#accordion1">
+                  <div class="accordion-body">{{ref.critere_evaluation}}</div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="ref5">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn5" aria-expanded="false" aria-controls="ref5">
+                    Critere d'admission
+                  </button>
+                </h2>
+                <div id="btn5" class="accordion-collapse collapse" aria-labelledby="ref5" data-bs-parent="#accordion1">
+                  <div class="accordion-body">{{ref.critere_admission}}</div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="ref6">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn6" aria-expanded="false" aria-controls="btn6">
+                    Groupe de competences
+                  </button>
+                </h2>
+                <div id="btn6" class="accordion-collapse collapse" aria-labelledby="ref6" data-bs-parent="#ref6">
+
+                  <div class="accordion-body" *ngFor="let gc of ref['groupeCompetence']">
+                    <div class="accordion accordion-flush" id="accordion3">
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="ref7">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn7" aria-expanded="false" aria-controls="btn7">
+                            Libelle
+                          </button>
+                        </h2>
+                        <div id="btn7" class="accordion-collapse collapse" aria-labelledby="ref7" data-bs-parent="#accordion3">
+                          <div class="accordion-body">{{gc.libelle}}</div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="ref88">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn8" aria-expanded="false" aria-controls="ref8">
+                            Description
+                          </button>
+                        </h2>
+                        <div id="ref8" class="accordion-collapse collapse" aria-labelledby="ref8" data-bs-parent="#accordion3">
+                          <div class="accordion-body">dfghjk</div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="ref9">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn9" aria-expanded="false" aria-controls="btn9">
+                            Competences
+                          </button>
+                        </h2>
+                        <div id="btn9" class="accordion-collapse collapse" aria-labelledby="ref9" data-bs-parent="#accordion3">
+                          <div class="accordion-body" *ngFor="let c of gc['competence']">
+
+                            <div class="accordion accordion-flush" id="accordion4">
+
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="ref10">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn1010" aria-expanded="false" aria-controls="btn10">
+                                    Libelle
+                                  </button>
+                                </h2>
+                                <div id="btn10" class="accordion-collapse collapse" aria-labelledby="ref10" data-bs-parent="#acordion4">
+                                  <div class="accordion-body">{{c.libelle}}</div>
+                                </div>
+                              </div>
+
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="ref11">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#btn11" aria-expanded="false" aria-controls="ref11">
+                                    Description
+                                  </button>
+                                </h2>
+                                <div id="btn1111" class="accordion-collapse collapse" aria-labelledby="ref11" data-bs-parent="#accordion4">
+                                  <div class="accordion-body">{{c.description}}</div>
+                                </div>
+                              </div>
+
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree111">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree111" aria-expanded="false" aria-controls="flush-collapseThree111">
+                                    Niveaux
+                                  </button>
+                                </h2>
+                                <div id="flush-collapseThree111" class="accordion-collapse collapse" aria-labelledby="flush-headingThree111" data-bs-parent="#accordionFlushExample111">
+                                  <div class="accordion-body" *ngFor="let n of c['niveau']">
+
+                                    <div class="accordion accordion-flush" id="accordionFlushExample111">
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne111">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne111" aria-expanded="false" aria-controls="flush-collapseOne111">
+                                            Libelle
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseOne111" class="accordion-collapse collapse" aria-labelledby="flush-headingOne111" data-bs-parent="#accordionFlushExample111">
+                                          <div class="accordion-body">{{n.libelle}}</div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne112">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne112" aria-expanded="false" aria-controls="flush-collapseOne112">
+                                            Critere d'Evaluation
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseOne112" class="accordion-collapse collapse" aria-labelledby="flush-headingOne112" data-bs-parent="#accordionFlushExample112">
+                                          <div class="accordion-body">{{n.critereEvaluation}}</div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne113">
+                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne113" aria-expanded="false" aria-controls="flush-collapseOne113">
+                                            Actions
+                                          </button>
+                                        </h2>
+                                        <div id="flush-collapseOne113" class="accordion-collapse collapse" aria-labelledby="flush-headingOne113" data-bs-parent="#accordionFlushExample113">
+                                          <div class="accordion-body">{{n.action}}</div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>-->
+
+
+
+<p-accordion [multiple]="true">
+  <p-accordionTab id="item{{ref.id}}">
+    <p-header>
+      <div class="row">
+        <div class="col-7 pt-4">{{ref.libelle}}</div>
+        <div class="col">
+          <button class="btn btn-sm"><a [routerLink]="['/home/referentiel', 'updatereferentiel', ref.id]" title="modifier ce referentiel"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
+          <button class="btn btn-sm"><a (click)="deleteRef(ref)"><span class="material-icons" title="supprimer ce referentiel" style="color: red">close</span></a></button>
+          <button (click)="generatePDF()" class="btn btn-sm btn-outline-danger mb-2"><i class="fa fa-file-pdf"></i>Generate PDF</button>
+          <button (click)="generatePDF( 'download')" class="btn btn-sm btn-outline-success mb-2"><i class="fa fa-download"></i>Download PDF</button>
+          <button (click)="generatePDF('print')" class="btn btn-sm btn-outline-secondary"><i class="fa fa-print"></i>Print PDF</button>
+        </div>
+      </div>
+    </p-header>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ref.presentation}}</li>
+      <li class="list-group-item" id="programme">
+        <pdf-viewer [src]="pdfSrc"
+                    style="width: 1000px; height: 50px;"
+        ></pdf-viewer>
+        <button (click)="createPdf()" class="btn btn-sm btn-outline-danger mb-2"><i class="fa fa-download"></i></button>
+      </li>
+      <li class="list-group-item">{{ref.critereAdmission}}</li>
+      <li class="list-group-item">{{ref.critereEvaluation}}</li>
+      <li class="list-group-item">
+        <p-accordionTab>
+          <p-header>Groupe de Competences</p-header>
+          <select class="form-select">
+            <option value="" *ngFor="let gc of ref['groupeCompetence']">{{gc.libelle}}</option>
+          </select>
+        </p-accordionTab>
+      </li>
+    </ul>
+  </p-accordionTab>
+</p-accordion>
+

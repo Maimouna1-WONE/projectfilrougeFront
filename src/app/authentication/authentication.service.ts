@@ -61,4 +61,8 @@ export class AuthenticationService
       return null;
     }
   }
+  getbyLogin(): Observable<User>
+  {
+    return this.http.get<User>(`/api/admin/users/search`);
+  }
 }

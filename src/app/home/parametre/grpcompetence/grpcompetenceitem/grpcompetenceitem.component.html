@@ -1,0 +1,30 @@
+<flash-messages></flash-messages>
+
+<p-accordion>
+  <p-accordionTab>
+    <p-header>
+      <div class="row">
+        <div class="col-7 pt-4">{{grpcmp.libelle}}</div>
+        <div class="col">
+          <button class="btn btn-sm"><a [routerLink]="['/home/grpcompetence', 'updategrpcompetence', grpcmp.id]" title="modifier ce groupe"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
+          <button class="btn btn-sm"><a (click)="deleteGrpComp(grpcmp)"><span class="material-icons" title="supprimer ce groupe" style="color: red">close</span></a></button>
+        </div>
+      </div>
+    </p-header>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{grpcmp.description}}</li>
+      <li class="list-group-item">
+        <label for="" class="form-label">Competences</label>
+        <select class="form-select">
+          <option value="" *ngFor="let cmp of grpcmp['competence']">{{cmp.libelle}}</option>
+        </select>
+      </li>
+      <li class="list-group-item">
+        <label for="" class="form-label">Tags</label>
+        <select class="form-select">
+          <option value=""></option>
+        </select>
+      </li>
+    </ul>
+  </p-accordionTab>
+</p-accordion>

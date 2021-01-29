@@ -1,23 +1,27 @@
+import {Groupecompetence} from './groupecompetence';
+
 export class Referentiel {
   id?: number;
   libelle: string;
   presentation: string;
-  programme: any;
+  programme?: any;
   // tslint:disable-next-line:variable-name
-  critere_evaluation: string;
+  critereEvaluation: string;
   // tslint:disable-next-line:variable-name
-  critere_admission: string;
+  critereAdmission: string;
+  groupeCompetence: Groupecompetence;
   constructor(id: number, libelle: string, presentation: string,
               // tslint:disable-next-line:variable-name
-              programme: any, critere_evaluation: string,
+              programme: any, critereEvaluation: string,
               // tslint:disable-next-line:variable-name
-              critere_admission: string) {
+              critereAdmission: string, groupeCompetence: Groupecompetence) {
     this.id = id;
     this.libelle = libelle;
     this.presentation = presentation;
     this.programme = programme;
-    this.critere_evaluation = critere_evaluation;
-    this.critere_admission = critere_admission;
+    this.critereEvaluation = critereEvaluation;
+    this.critereAdmission = critereAdmission;
+    this.groupeCompetence = groupeCompetence;
   }
 }
 

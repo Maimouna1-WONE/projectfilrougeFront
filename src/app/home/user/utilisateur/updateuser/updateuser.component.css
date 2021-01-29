@@ -1,0 +1,7 @@
+.input-group-prepend span{
+  width: 10px;
+  height: 10px;
+  color: black;
+  border:0 !important;
+}
+

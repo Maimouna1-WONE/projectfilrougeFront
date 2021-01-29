@@ -1,0 +1,44 @@
+<h2 class="text-center">Ajouter un Groupe de competence</h2>
+<hr>
+<flash-messages></flash-messages>
+<form class="form-control" [formGroup]="addForm" (ngSubmit)="OnSubmit()">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Libelle</label>
+        <input  class="form-control" type="text" formControlName="libelle">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Description</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label class="fw-bold form-label">Competences</label>
+        <mat-form-field>
+          <mat-select [formControl]="toppingsControl" multiple formControlName="competence">
+            <mat-select-trigger>
+              <mat-chip-list>
+                <mat-chip *ngFor="let comp of toppingsControl.value" [removable]="true" (removed)="onToppingRemoved(comp)">
+                  {{ comp }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </mat-select-trigger>
+            <mat-option *ngFor="let comp of competences" [value]="comp.id">{{comp.libelle}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br/>
+        {{ toppingsControl.value | json }}
+      </div>
+    </div>
+  </div>
+  <div class="row btn-sm text-center">
+    <button type="submit" class="btn btn-info">Soumettre</button>
+  </div>
+</form>
+

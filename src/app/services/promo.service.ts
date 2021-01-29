@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Promo} from '../models/promo';
 import {Profil} from '../models/profil';
+import {Competence} from '../models/competence';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class PromoService {
   {
     return this.http.delete(`/api/admin/promos/${id}`);
   }
-  addPromo(data: FormData): Observable<Promo[]>
+  // tslint:disable-next-line:typedef
+  addPromo(data: FormData)
   {
     // @ts-ignore
     return this.http.post('/api/admin/promos', data);
@@ -30,5 +32,35 @@ export class PromoService {
   getApprenant(): Observable<Promo[]>
   {
     return this.http.get<Promo[]>(`/api/admin/promos/principal`);
+  }
+  getApprenantAttente(id: number): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/${id}/principal`);
+  }
+  getApprenantprofilsortie(id: number): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/${id}/profilsorties`);
+  }
+  getApprenantprofilsortiepromo(id: number, id1: number): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/${id}/profilsorties/${id1}`);
+  }
+  getFormateur(id: number): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/${id}/formateurs`);
+  }
+  getReferentiel(id: number): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/${id}/referentiels`);
+  }
+  // tslint:disable-next-line:typedef
+  getAttente()
+  {
+    return this.http.get(`/api/admin/promos/apprenants/attente`);
+  }
+  // tslint:disable-next-line:typedef
+  getProfilsortie()
+  {
+    return this.http.get(`/api/admin/profilssorties`);
   }
 }

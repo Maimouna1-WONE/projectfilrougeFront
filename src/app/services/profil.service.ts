@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Profil} from '../models/profil';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class ProfilService {
     return this.http.get<Profil[]>(`/api/admin/profils/${id}/users`);
   }
   // tslint:disable-next-line:typedef
-  updateOneProfil(id: number, data: Profil)
+  updateOneProfil(id: number, data: object)
   {
     // @ts-ignore
     return this.http.put(`/api/admin/profils/${id}`, data);
@@ -40,9 +41,11 @@ export class ProfilService {
   addProfil(data: string): Observable<Profil[]>
   {
     // @ts-ignore
-    return this.http.post<Profil>('/api/admin/profils', JSON.stringify(data), this.httpOptions).pipe(
-      catchError(this.errorHandler)
-    );
+    return this.http.post<Profil>('/api/admin/profils', JSON.stringify(data), this.httpOptions);
+  }
+  getbyId(id: number): Observable<Profil>
+  {
+    return this.http.get<Profil>(`/api/admin/profils/${id}`);
   }
   // tslint:disable-next-line:typedef
   errorHandler(error) {

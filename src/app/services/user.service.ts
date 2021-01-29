@@ -2,12 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/user';
 import {Observable} from 'rxjs';
-import {Profil} from '../models/profil';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService{
 
   constructor(private http: HttpClient) { }
   // tslint:disable-next-line:typedef
@@ -16,6 +15,11 @@ export class UserService {
   {
     // @ts-ignore
     return this.http.get<User[]>(`/api/admin/users?archive=false&page=${num + 1}`);
+  }
+  getAllUsers(): Observable<User[]>
+  {
+    // @ts-ignore
+    return this.http.get<User[]>(`/api/admin/users`);
   }
   getbyId(id: number): Observable<User>
   {
@@ -26,13 +30,13 @@ export class UserService {
   {
     return this.http.delete(`/api/admin/users/${id}`);
   }
-  addUser(data: FormData): Observable<User[]>
+  addUser(data: FormData): Observable<User>
   {
     // @ts-ignore
     return this.http.post('/api/admin/users', data);
   }
   // tslint:disable-next-line:typedef
-  updateOneProfil(id: number, data: FormData)
+  updateOneUser(id: number, data: FormData)
   {
     // @ts-ignore
     return this.http.put(`/api/admin/users/${id}`, data);

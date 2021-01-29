@@ -1,4 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Langar', cursive; }
+/*@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Play', sans-serif;
+  padding: 0;
+  font-family: -apple-system,
+  BlinkMacSystemFont, “Segoe UI”,
+  Roboto, Helvetica,
+  Arial, sans-serif, “Apple Color Emoji”,
+  “Segoe UI Emoji”, “Segoe UI Symbol”;
+}
+* {
+  box-sizing: border-box;
+}*/

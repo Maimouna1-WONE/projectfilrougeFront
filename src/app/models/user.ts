@@ -9,6 +9,7 @@ export class User {
   adresse: string;
   telephone: string;
   email: string;
+  genre: string;
   avatar?: any;
   token?: string;
   profil?: Profil;
@@ -20,6 +21,7 @@ export class User {
     this.password = password;
     this.prenom = prenom;
     this.nom = nom;
+    this.genre = genre;
     this.adresse = adresse;
     this.telephone = telephone;
     this.email = email;

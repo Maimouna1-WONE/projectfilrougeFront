@@ -1,0 +1,66 @@
+<!--<button class="btn-secondary mt-5 mb-3" title="liste des apprenants dans les groupes principals" type="submit" (click)="getApprenant()"><span class="material-icons b">view_list</span></button>-->
+<div class="row bg-light mt-5">
+  <mat-form-field>
+    <mat-label>Promos</mat-label>
+    <mat-select [formControl]="toppingsControl">
+      <mat-option *ngFor="let topping of promos" [value]="topping.id">{{topping.libelle}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>{{toppingsControl.value}}</p>
+</div>
+
+<div class="row bg-light mt-5">
+  <mat-form-field>
+    <mat-label>Profil Sortie</mat-label>
+    <mat-select [formControl]="toppingsControl1">
+      <mat-option *ngFor="let topping of ps" [value]="topping.id">{{topping.libelle}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>{{toppingsControl1.value}}</p>
+</div>
+
+<a *ngIf="toppingsControl.value!=0 && toppingsControl1.value!=0" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/apprenantpromoprofilsortie/', toppingsControl.value, 'profilsortie', toppingsControl1.value]">Voir les Apprenants</a>
+
+
+<nav *ngIf="toppingsControl.value!=0" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Promo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/apprenantpromo/', toppingsControl.value]">Apprenants des groupes principaux</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/apprenantprofilsortiepromo/', toppingsControl.value]">Apprenants par profil de sortie</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/formateurpromo/', toppingsControl.value]">Formateurs</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Infos Supp
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/infopromo']">Infos</a></li>
+            <li><a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home/historique/principal']">Liste Apprenants des groupes principaux</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<router-outlet></router-outlet>
+
+
+<!--<h2>liste d'attente</h2>
+<a href="" class="btn btn-sm btn-success">relancer toutes les invitations</a>
+<label for="" class="form-label" *ngFor="let app of attente">
+  {{app.email}}
+  <a href="" class="btn btn-sm btn-outline-success">relancer l'invitation</a>
+</label>-->
