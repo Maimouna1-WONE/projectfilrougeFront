@@ -14,6 +14,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 export class UpdateuserComponent implements OnInit {
   id: number;
   ok: any;
+  img = false;
   submitted = false;
   addForm: FormGroup;
   nom: string; prenom: string; login: string;

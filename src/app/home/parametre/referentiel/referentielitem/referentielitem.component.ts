@@ -8,6 +8,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Groupecompetence} from '../../../../models/groupecompetence';
 
 @Component({
   selector: 'app-referentielitem',
@@ -37,7 +38,37 @@ export class ReferentielitemComponent implements OnInit {
     }
     return bytes.buffer;
   }
+  // tslint:disable-next-line:typedef
+  base64toBlob(base64Data, contentType = 'application/pdf') {
+    contentType = contentType || '';
+    // tslint:disable-next-line:prefer-const
+    let sliceSize = 512;
+    base64Data = base64Data.replace(/]+,/, '');
+    base64Data = base64Data.replace(/\s/g, '');
+    // tslint:disable-next-line:prefer-const
+    let byteCharacters = window.atob(base64Data);
+    const bytesLength = byteCharacters.length;
+    const slicesCount = Math.ceil(bytesLength / sliceSize);
+    const byteArrays = new Array(slicesCount);
 
+    for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      const begin = sliceIndex * sliceSize;
+      const end = Math.min(begin + sliceSize, bytesLength);
+
+      const bytes = new Array(end - begin);
+      for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+  // tslint:disable-next-line:typedef
+  openProgramme(){
+    const file = this.base64toBlob(this.ref.programme);
+    const fileUrl = URL.createObjectURL(file);
+    window.open(fileUrl, '_blank');
+  }
 // tslint:disable-next-line:typedef
   deleteRef(ref: Referentiel){
     const res = confirm('Êtes-vous sûr de vouloir supprimer?');
@@ -83,20 +114,9 @@ export class ReferentielitemComponent implements OnInit {
     }else{
       pdfMake.createPdf(docDefinition).open();
     }
-
   }
   // tslint:disable-next-line:typedef
-  createPdf() {
-    // tslint:disable-next-line:prefer-const
-    /*let doc = new jsPDF.jsPDF();
-    doc.setFontSize(18);
-    doc.text('My Team Detail', 11, 8);
-    doc.setFontSize(11);
-    doc.setTextColor(100);
-    (doc as any).autoTable({
-      html: '#programme'
-    });
-    doc.output('dataurlnewwindow');
-    doc.save('myteamdetail.pdf');*/
+  redirect(){
+    alert('ok');
   }
 }

@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ProfilService} from '../../../services/profil.service';
 import {Profil} from '../../../models/profil';
 import {PageEvent} from '@angular/material/paginator';
-import { FlashMessagesService} from 'angular2-flash-messages';
 import {ProfilSortie} from '../../../models/ProfilSortie';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 // tslint:disable-next-line:no-unused-expression label-position
 @Component({
@@ -12,7 +13,7 @@ import {ProfilSortie} from '../../../models/ProfilSortie';
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
-  constructor(private profilservice: ProfilService, private flashmessage: FlashMessagesService) {
+  constructor(private profilservice: ProfilService) {
   }
   libelle: string;
   page = 1;
@@ -51,45 +52,61 @@ export class ProfilComponent implements OnInit {
         error => console.log('erreur de recuperation profils')
       );
   }
-
   // tslint:disable-next-line:typedef
-  getUsersByProfil(profil: Profil) {
-    // @ts-ignore
-    const liste = document.getElementById('liste');
-    liste.style.display = 'block';
-    this.libelle = profil.libelle;
-    this.profilservice.getUsersProfil(profil.id).subscribe(
-      res => {
-        this.usersprofil = res['users'];
+  delete(p: Profil){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success m-2',
+        cancelButton: 'btn btn-danger m-2'
       },
-      error => console.log('erreur de recuperation users by profil'),
-      () => console.log('complete')
-    );
-  }
-  // tslint:disable-next-line:typedef
-  delete(ps: ProfilSortie){
-    const res = confirm('Êtes-vous sûr de vouloir supprimer?');
-    if (res) {
-      this.profilservice.deleteOneProfil(ps.id).subscribe(
-        res => {
-          this.flashmessage.show('Suppression reussie', {cssClass: 'alert-success', timeout: 1000});
-        },
-        error => {
-          this.flashmessage.show('Echec suppression', {cssClass: 'alert-danger', timeout: 1000});
-        });
-    }
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.profilservice.deleteOneProfil(p.id).subscribe();
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        );
+      }
+    });
   }
   // tslint:disable-next-line:typedef
   update(profil: Profil) {
-    this.inputmodifie = document.getElementById('td' + profil.id).textContent;
-    const prof = new Profil(profil.id, this.inputmodifie);
-    this.profilservice.updateOneProfil(profil.id, prof).subscribe(
-      res => {
-        this.flashmessage.show('Modification reussie', {cssClass: 'alert-success', timeout: 1000});
-      },
-      error => {
-        this.flashmessage.show('Echec', {cssClass: 'alert-danger', timeout: 1000});
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.inputmodifie = document.getElementById('td' + profil.id).textContent;
+        const prof = new Profil(this.inputmodifie);
+        this.profilservice.updateOneProfil(profil.id, prof).subscribe();
+        Swal.fire('Saved!', '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
       }
-    );
+    });
   }
 }

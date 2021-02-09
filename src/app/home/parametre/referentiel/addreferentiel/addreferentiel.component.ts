@@ -34,7 +34,7 @@ programme: any;
       libelle: ['', Validators.required],
       presentation: ['', Validators.required],
       grpcompetence: ['', Validators.required],
-      programme: ['', Validators.required],
+      programme: [''],
       critereevaluation: ['', Validators.required],
       critereadmission: ['', Validators.required]
     });

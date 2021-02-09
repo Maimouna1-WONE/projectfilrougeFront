@@ -9,6 +9,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {ExcelService} from '../../../services/excel.service';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-utilisateur',
@@ -42,7 +43,7 @@ export class UtilisateurComponent implements OnInit {
   cour: User;
   // tslint:disable-next-line:variable-name
   message: string;
-  colonne: string[] = ['profil', 'nom', 'prenom', 'login', 'telephone', 'email', 'adresse', 'genre'];
+  colonne: string[] = ['avatar', 'profil', 'nom', 'prenom', 'login', 'telephone', 'email', 'adresse', 'genre', 'actions'];
   currentUser: User;
   pageEvent: PageEvent;
   pageIndex: number;
@@ -85,30 +86,73 @@ export class UtilisateurComponent implements OnInit {
   ngOnInit()
   {
     // tslint:disable-next-line:only-arrow-functions typedef
-    /*$(document).ready( function() {
-      $('#mytable').DataTable();
-    } );*/
-    // $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+    jQuery(document).ready(function() {
+      // tslint:disable-next-line:prefer-const
+      let btn = $('#button');
+      // tslint:disable-next-line:only-arrow-functions typedef
+      $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+          btn.addClass('show');
+        } else {
+          btn.removeClass('show');
+        }
+      });
+      // tslint:disable-next-line:only-arrow-functions typedef
+      btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, '300');
+      });
+    });
     this.val = this.getUserInfo();
     this.userService.getAll(0)
       .subscribe(
         res => {
           this.users = res;
+          console.log(this.users);
         },
         error => console.log('error de recuperation users')
       );
-    /*this.userService.getAllUsers()
-      .subscribe(
-        res1 => {
-          this.allUsers = res1;
-          console.log(res1);
-        },
-        error => console.log('error de recuperation users')
-      );*/
   }
+  // tslint:disable-next-line:typedef
+  delete(user: User) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success m-2',
+        cancelButton: 'btn btn-danger m-2'
+      },
+      buttonsStyling: false
+    });
 
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userservice.deleteOneUser(user.id).subscribe();
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        );
+      }
+    });
+  }
   exportAsXLSX(): void {
-    this.excelservice.exportAsExcelFile(this.allUsers, 'sample');
+    this.excelservice.exportAsExcelFile(this.users, 'sample');
   }
   // tslint:disable-next-line:typedef
   refresh(){
@@ -125,7 +169,7 @@ export class UtilisateurComponent implements OnInit {
     // tslint:disable-next-line:prefer-const
     let doc = new jsPDF.jsPDF();
     doc.setFontSize(18);
-    doc.text('My Team Detail', 11, 8);
+    doc.text('Liste des Utilisateurs', 11, 8);
     doc.setFontSize(11);
     doc.setTextColor(100);
     (doc as any).autoTable({
@@ -136,5 +180,4 @@ export class UtilisateurComponent implements OnInit {
     // below line for Download PDF document
     doc.save('myteamdetail.pdf');
   }
-
 }

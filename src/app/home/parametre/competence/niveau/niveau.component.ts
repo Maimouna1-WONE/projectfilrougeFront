@@ -19,6 +19,7 @@ export class NiveauComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
         this.competence = data.Competence;
+        console.log(this.competence.niveau);
       }
     );
   }

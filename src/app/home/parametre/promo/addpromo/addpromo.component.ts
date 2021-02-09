@@ -68,7 +68,7 @@ export class AddpromoComponent implements OnInit {
   }
   newgroupe(): FormGroup {
     return this.formBuilder.group({
-      app: ''
+      app: ['', Validators.required]
     });
   }
   // tslint:disable-next-line:typedef

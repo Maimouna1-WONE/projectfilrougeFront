@@ -12,15 +12,17 @@
       </div>
     </p-header>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{grpcmp.description}}</li>
       <li class="list-group-item">
-        <label for="" class="form-label">Competences</label>
+        <h5 style="color: #52B4CA;">Description</h5>
+        {{grpcmp.description}}</li>
+      <li class="list-group-item">
+        <h5 style="color: #52B4CA;">Competence</h5>
         <select class="form-select">
           <option value="" *ngFor="let cmp of grpcmp['competence']">{{cmp.libelle}}</option>
         </select>
       </li>
       <li class="list-group-item">
-        <label for="" class="form-label">Tags</label>
+        <h5 style="color: #52B4CA;">Tags</h5>
         <select class="form-select">
           <option value=""></option>
         </select>

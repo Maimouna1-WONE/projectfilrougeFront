@@ -26,10 +26,10 @@ export class ProfilsortieService {
   {
     return this.http.delete(`/api/admin/profilssorties/${id}`);
   }
-  addProfilsortie(data: FormData): Observable<ProfilSortie[]>
+  addProfilsortie(data: object): Observable<ProfilSortie[]>
   {
     // @ts-ignore
-    return this.http.post('/api/admin/profilsortie', data);
+    return this.http.post('/api/admin/profilssorties', data);
   }
   // tslint:disable-next-line:typedef
   updateOneProfilsortie(id: number, data: object)

@@ -65,6 +65,7 @@ import { DetailreferentielComponent } from './home/historique/detailreferentiel/
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import { ApprenantprofilsortiepromoComponent } from './home/historique/apprenantprofilsortiepromo/apprenantprofilsortiepromo.component';
 import { ApprenantpromoprofilsortieComponent } from './home/historique/apprenantpromoprofilsortie/apprenantpromoprofilsortie.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { ApprenantpromoprofilsortieComponent } from './home/historique/apprenant
     PrincipalComponent,
     DetailreferentielComponent,
     ApprenantprofilsortiepromoComponent,
-    ApprenantpromoprofilsortieComponent
+    ApprenantpromoprofilsortieComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

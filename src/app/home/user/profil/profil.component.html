@@ -1,23 +1,21 @@
-
-<h1 class="fw-bold mt-5">Liste des profils</h1>
-  <a style="float: right" [routerLink]="['/home/profil', 'addprofil']" title="Ajouter un new profil"><span class="material-icons w-100">person_add_alt_1</span></a>
-<router-outlet class="shadow-lg p-3 mt-5 bg-white rounded"></router-outlet>
+<h1 class="fw-bold text-center">Liste des profils</h1>
+  <a style="float: right" [routerLink]="['/home/profil', 'addprofil']" title="Ajouter un new profil" class="mt-2 mb-3"><i class="fa fa-2x fa-user-plus"></i></a>
+<router-outlet></router-outlet>
   <hr>
-<flash-messages></flash-messages>
 <table id="profil" mat-table [dataSource]="profils" class="shadow-sm p-3 mb-5 bg-white table table-bordered table-responsive table-bordered-dark">
   <ng-container matColumnDef="libelle">
-    <th mat-header-cell *matHeaderCellDef>Libelle</th>
-    <td id="td{{pro.id}}" contenteditable="true" (focusout)="update(pro)" mat-cell *matCellDef="let pro">{{ pro.libelle }}</td>
+    <th mat-header-cell *matHeaderCellDef><h3 class="fw-bold text-center">Libelle</h3></th>
+    <td id="td{{pro.id}}" contenteditable="true" class="align-middle" (focusout)="update(pro)" mat-cell *matCellDef="let pro">{{ pro.libelle }}</td>
   </ng-container>
   <ng-container matColumnDef="liste">
-    <th mat-header-cell *matHeaderCellDef>Liste des utilisateurs d'un profil {{libelle}}</th>
-    <td mat-cell *matCellDef="let pro">
-      <a [routerLink]="['/home/profil/', pro.id, 'users']" class="btn btn-sm btn-outline-info"><span class="material-icons">child_care</span></a>
+    <th mat-header-cell *matHeaderCellDef><h3 class="fw-bold text-center">Liste des utilisateurs d'un profil</h3></th>
+    <td mat-cell *matCellDef="let pro" class="text-center p-3">
+      <a [routerLink]="['/home/', pro.id, 'users']" class="btn btn-sm btn-outline-info"><i class="fa fa-2x fa-users"></i></a>
     </td>
   </ng-container>
   <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef>Delete</th>
-    <td mat-cell *matCellDef="let pro">
+    <th mat-header-cell *matHeaderCellDef><h3 class="fw-bold text-center">Action</h3></th>
+    <td mat-cell *matCellDef="let pro" class="text-center p-3">
       <a (click)="delete(pro)" class="btn btn-sm btn-outline-danger"><span class="material-icons">delete</span></a>
     </td>
   </ng-container>
@@ -33,3 +31,4 @@
 
   </mat-paginator>
 </div>
+

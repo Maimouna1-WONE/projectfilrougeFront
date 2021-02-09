@@ -1,17 +1,18 @@
-<a class="mt-5" [routerLink]="['/home/', 'addcompetence']"><span class="material-icons" title="ajouter une competence">add_box</span></a>
 <div class="row mt-5" id="liste">
-    <h1 class="text-info mt-5">Liste des competences à valider</h1>
+    <h1 class="text-center">Liste des competences à valider</h1>
   <hr>
+  <a class="mb-3" style="text-decoration: none" [routerLink]="['/home/', 'addcompetence']"><i class="fa fa-2x fa-plus"></i></a>
   <div class="col-4 overflow-auto bg-light">
     <mat-form-field>
-      <mat-label>Groupes de Competences</mat-label>
+      <mat-label>
+        <h5 style="color: #52B4CA;">Groupes de Competences</h5>
+      </mat-label>
       <mat-select [formControl]="toppingsControl">
         <mat-option *ngFor="let topping of grpcompetences" [value]="topping.id" (focusout)="getgroupe()">{{topping.libelle}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <p>{{toppingsControl.value}}</p>
-    <ul class="list-group">
-      <li class="list-group-item" aria-disabled="true"  *ngFor="let c of competences"><a [routerLink]="['/home/parametre/competence/', c.id, 'niveau']">{{c.libelle}}</a></li>
+    <ul class="list-group shadow-lg">
+      <li class="list-group-item bg-info" style="color: darkgrey" aria-disabled="true"  *ngFor="let c of competences"><a [routerLink]="['/home/competence/', c.id, 'niveau']" style="text-decoration: none; color: black">{{c.libelle}}</a></li>
     </ul>
   </div>
   <div class="col form-control">
@@ -19,6 +20,3 @@
   </div>
 </div>
 
-<div class="row">
-  <router-outlet></router-outlet>
-</div>

@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../authentication/authentication.service
 import {User} from '../../models/user';
 import {ActivatedRoute} from '@angular/router';
 
+// @ts-ignore
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -52,9 +53,7 @@ export class NavbarComponent implements OnInit {
         this.user = res;
       }
     );
-    //console.log(this.route.snapshot.routeConfig.path);
   }
-
   // tslint:disable-next-line:typedef
   deconnexion(){
     this.auth.logout();

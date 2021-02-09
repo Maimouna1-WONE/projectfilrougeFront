@@ -9,8 +9,9 @@ import {Profil} from '../../../../models/profil';
   styleUrls: ['./detailprofil.component.css']
 })
 export class DetailprofilComponent implements OnInit {
-  scrollableCols: any[];
 Users: Profil[];
+  colonne: string[] = ['nom', 'prenom', 'login', 'telephone', 'email', 'adresse', 'genre'];
+
   constructor(private profilservice: ProfilService,
               private  route: ActivatedRoute) { }
 
@@ -20,13 +21,5 @@ Users: Profil[];
         this.Users = data.users;
       }
     );
-    this.scrollableCols = [
-      { field: 'id', header: 'Id' },
-      { field: 'nom', header: 'Nom' },
-      { field: 'prenom', header: 'Prenom' },
-      { field: 'email', header: 'Email' },
-      { field: 'adresse', header: 'Adresse' },
-      { field: 'login', header: 'Login' }
-    ];
   }
 }

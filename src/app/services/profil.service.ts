@@ -38,10 +38,10 @@ export class ProfilService {
   {
     return this.http.delete(`/api/admin/profils/${id}`);
   }
-  addProfil(data: string): Observable<Profil[]>
+  addProfil(data: object): Observable<Profil[]>
   {
     // @ts-ignore
-    return this.http.post<Profil>('/api/admin/profils', JSON.stringify(data), this.httpOptions);
+    return this.http.post<Profil>('/api/admin/profils', data);
   }
   getbyId(id: number): Observable<Profil>
   {

@@ -1,81 +1,11 @@
-<div class="row">
-    <div class="row" >
-      <p>
-        <a [routerLink]="['/home/','updateuser', user.id]" class="btn-sm" style="color: peru; text-decoration: none"><i class="fa fa-user-edit"></i></a>
-        <button type="button"  (click)="delete(user)" style="border: none"><i class="fa fa-trash-alt"></i></button>
-      </p>
-      <div class="col-6 text-center">
-        <img class="img-thumbnail" width="75" height="100" src="data:image/jpeg;base64,{{user.avatar}}" alt="alt">
-      </div>
-      <div class="col">
-        <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-      </div>
-    </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label text-primary fw-bold">NOM:</label>
-      <label class="form-control" for="">{{ user.nom }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">PRENOM:</label>
-      <label class="form-control" for="">{{ user.prenom }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">LOGIN:</label>
-      <label class="form-control " for="">{{ user.login }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">PROFIL:</label>
-      <label class="form-control " for="">{{ user.profil.libelle }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">TELEPHONE:</label>
-      <label class="form-control " for="">{{ user.telephone }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">EMAIL:</label>
-      <label class="form-control " for="">{{ user.email }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">ADRESSE:</label>
-      <label class="form-control " for="">{{ user.adresse }}</label>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="form-group">
-      <label class="form-label fw-bold text-primary">GENRE:</label>
-      <label class="form-control " for="">{{user.genre}}</label>
-    </div>
-  </div>
-    <!--<div class="col-6">
-      <div class="form-group">
-        <label class="form-label fw-bold text-primary">STATUT:</label>
-        <label class="form-control " for="" *ngIf="user.statut; else other">{{user.statut}}</label>
-        <ng-template #other>
-          <label for="" class="form-control ">neant</label>
-        </ng-template>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label class="form-label fw-bold text-primary">METIER:</label>
-        <label class="form-control " for="" *ngIf="user.metier; else other">{{user.metier}}</label>
-        <ng-template #other>
-          <label for="" class="form-control ">neant</label>
-        </ng-template>
-      </div>
-    </div>-->
-</div>
 
+
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-3 coverProfile mT20 col-xs-offset-2 dropShadow"></div>
+    <div class="col">
+      <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+  </div>
+</div>

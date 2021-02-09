@@ -1,3 +1,5 @@
+
+
 .navbar-toggler{
   background-color: blue;
 }
@@ -359,7 +361,6 @@ body {
   width: 100%;
   padding-left: 0;
   padding-top: 20px;
-  border: solid 2px red;
 }
 
 .page-wrapper .page-content > div {
@@ -483,4 +484,3 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
   border-right: none;
 }
-

@@ -1,7 +1,8 @@
-<p>Ajouter un referentiel</p>
-<a class="mt-5" [routerLink]="['/home/addreferentiel']"><span class="material-icons">add</span></a>
+
 <div class="row">
-    <h1 class="fw-bold text-primary text-center">Liste des referentiels</h1>
+    <h1 class="fw-bold text-center">Liste des referentiels</h1>
+  <hr>
+  <a class="mt-2 mb-3" [routerLink]="['/home/addreferentiel']"><i class="fa fa-2x fa-plus"></i></a>
     <app-referentielitem *ngFor="let referentiel of referentiels" [referentiel]="referentiel" class="col-sm-4 mb-5"></app-referentielitem>
 </div>
 

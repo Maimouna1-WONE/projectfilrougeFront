@@ -1,7 +1,7 @@
 <div class="row">
-    <a id="add" [routerLink]="['/home/addgrpcompetence']" title="ajouter un grp de competence"><span class="material-icons">subtitles</span></a>
-    <h1 class="text-center text-info fw-bold mb-5 form-label">Liste des Groupes de Competences</h1>
-    <app-grpcompetenceitem class="col-sm-4 mb-5" *ngFor="let grpcomp of grpcompetences" [grpcmp]="grpcomp"></app-grpcompetenceitem>
+    <h1 class="text-center fw-bold mb-5 form-label">Liste des Groupes de Competences</h1>
+  <a id="add" [routerLink]="['/home/addgrpcompetence']" title="ajouter un grp de competence" style="text-decoration: none" class="mb-3"><i class="fa fa-2x fa-plus"></i></a>
+  <app-grpcompetenceitem class="col-sm-4 mb-5" *ngFor="let grpcomp of grpcompetences" [grpcmp]="grpcomp"></app-grpcompetenceitem>
 </div>
 
 

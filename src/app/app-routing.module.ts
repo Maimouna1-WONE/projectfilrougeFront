@@ -57,83 +57,88 @@ const routes: Routes = [
   {path: 'cm', component: CmComponent, canActivate: [AuthGuard]},
   {path: 'formateur', component: FormateurComponent, canActivate: [AuthGuard]},
   {path: 'apprenant', component: ApprenantComponent, canActivate: [AuthGuard]},
-  {path: 'referentiel', component: ReferentielComponent, canActivate: [AuthGuard]},
-  {path: 'addpromo', component: AddpromoComponent, canActivate: [AuthGuard]},
-  {path: 'addprofil', component: AddprofilComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children:
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Home'}, children:
       [
-        {path: 'parametre', component: ProfilsortieComponent, canActivate: [AuthGuard]},
-        {path: 'promo', component: PromoComponent, canActivate: [AuthGuard], children:
+        {path: 'parametre', component: ProfilsortieComponent, data: {breadcrumb: 'parametre'}, canActivate: [AuthGuard]},
+        {path: 'promo', component: PromoComponent, data: {breadcrumb: 'promo'}, canActivate: [AuthGuard], children:
             [
-              {path: 'addpromo', component: AddpromoComponent, canActivate: [AuthGuard]}
+              {path: 'addpromo', component: AddpromoComponent, data: {breadcrumb: 'addpromo'}, canActivate: [AuthGuard]}
             ]
         },
-        {path: 'referentiel', component: ReferentielComponent, canActivate: [AuthGuard], children:
+        {path: 'referentiel', component: ReferentielComponent, data: {breadcrumb: 'referentiel'}, canActivate: [AuthGuard], children:
             [
-              {path: 'updatereferentiel/:id', component: UpdatereferentielComponent, canActivate: [AuthGuard]},
-              {path: 'referentielitem', component: ReferentielitemComponent, canActivate: [AuthGuard]}
+              {path: 'updatereferentiel/:id', component: UpdatereferentielComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard]},
+              // tslint:disable-next-line:max-line-length
+              {path: 'referentielitem', component: ReferentielitemComponent, data: {breadcrumb: 'referentielitem'}, canActivate: [AuthGuard]}
             ]
         },
-        {path: 'addreferentiel', component: AddreferentielComponent, canActivate: [AuthGuard]},
-        {path: 'grpcompetence', component: GrpcompetenceComponent, canActivate: [AuthGuard], children:
+        {path: 'addreferentiel', component: AddreferentielComponent, data: {breadcrumb: 'addreferentiel'}, canActivate: [AuthGuard]},
+        {path: 'grpcompetence', component: GrpcompetenceComponent, data: {breadcrumb: 'grpcompetence'}, canActivate: [AuthGuard], children:
             [
-              {path: 'grpcompetenceitem', component: GrpcompetenceitemComponent, canActivate: [AuthGuard]},
-              {path: 'updategrpcompetence/:1', component: UpdategrpcompetenceComponent, canActivate: [AuthGuard]}
+              // tslint:disable-next-line:max-line-length
+              {path: 'grpcompetenceitem', component: GrpcompetenceitemComponent, data: {breadcrumb: 'grpcompetenceitem'}, canActivate: [AuthGuard]},
+              {path: 'updategrpcompetence/:1', component: UpdategrpcompetenceComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard]}
             ]
         },
-        {path: 'addgrpcompetence', component: AddgrpcompetenceComponent, canActivate: [AuthGuard]},
-        {path: 'competence', component: CompetenceComponent, canActivate: [AuthGuard], children:
+        {path: 'addgrpcompetence', component: AddgrpcompetenceComponent, data: {breadcrumb: 'addgrpcompetence'}, canActivate: [AuthGuard]},
+        {path: 'competence', component: CompetenceComponent, canActivate: [AuthGuard], data: {breadcrumb: 'competence'}, children:
             [
               // tslint:disable-next-line:max-line-length
-              {path: ':id/niveau', component: NiveauComponent, canActivate: [AuthGuard], resolve: {Competence: CompetenceResolverService}},
+              {path: ':id/niveau', component: NiveauComponent, canActivate: [AuthGuard], data: {breadcrumb: ''}, resolve: {Competence: CompetenceResolverService}},
             ]
         },
-        {path: 'addcompetence', component: AddcompetenceComponent, canActivate: [AuthGuard]},
-        {path: 'grptag', component: GrptagComponent, canActivate: [AuthGuard]},
-        {path: 'profilsortie', component: ProfilsortieComponent, canActivate: [AuthGuard], children:
+        {path: 'addcompetence', component: AddcompetenceComponent, data: {breadcrumb: 'addcompetence'}, canActivate: [AuthGuard]},
+        {path: 'grptag', component: GrptagComponent, data: {breadcrumb: 'grptag'}, canActivate: [AuthGuard]},
+        {path: 'profilsortie', component: ProfilsortieComponent, data: {breadcrumb: 'profilsortie'}, canActivate: [AuthGuard], children:
             [
-              {path: 'addprofilsortie', component: AddprofilsortieComponent, canActivate: [AuthGuard]},
+              // tslint:disable-next-line:max-line-length
+              {path: 'addprofilsortie', component: AddprofilsortieComponent, data: {breadcrumb: 'addprofilsortie'}, canActivate: [AuthGuard]},
             ]
         },
-        {path: 'historique', component: HistoriqueComponent, canActivate: [AuthGuard], children:
+        {path: 'historique', component: HistoriqueComponent, data: {breadcrumb: 'historique'}, canActivate: [AuthGuard], children:
             [
               // tslint:disable-next-line:max-line-length
-              {path: 'apprenantpromo/:id', component: ApprenantpromoComponent, canActivate: [AuthGuard], resolve: {apppromo: PromoApprenantResolverService}},
+              {path: 'apprenantpromo/:id', component: ApprenantpromoComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {apppromo: PromoApprenantResolverService}},
               // tslint:disable-next-line:max-line-length
-              {path: 'apprenantprofilsortiepromo/:id', component: ApprenantprofilsortiepromoComponent, canActivate: [AuthGuard], resolve: {appprofilsortie: PromoApprenantprofilsortieResolverService}},
+              {path: 'apprenantprofilsortiepromo/:id', component: ApprenantprofilsortiepromoComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {appprofilsortie: PromoApprenantprofilsortieResolverService}},
               // tslint:disable-next-line:max-line-length
-              {path: 'apprenantpromoprofilsortie/:id/profilsortie/:id1', component: ApprenantpromoprofilsortieComponent, canActivate: [AuthGuard], resolve: {apppromoprofilsortie: PromoApprenantpromoprofilsortieResolverService}},
+              {path: 'apprenantpromoprofilsortie/:id/profilsortie/:id1', component: ApprenantpromoprofilsortieComponent, data: {breadcrumb: 'promops'}, canActivate: [AuthGuard], resolve: {apppromoprofilsortie: PromoApprenantpromoprofilsortieResolverService}},
               // tslint:disable-next-line:max-line-length
-              {path: 'formateurpromo/:id', component: FormateurpromoComponent, canActivate: [AuthGuard], resolve: {formpromo: PromoFormateurResolverService}},
-              {path: 'infopromo', component: InfopromoComponent, canActivate: [AuthGuard]},
-              {path: 'principal', component: PrincipalComponent, canActivate: [AuthGuard]},
+              {path: 'formateurpromo/:id', component: FormateurpromoComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {formpromo: PromoFormateurResolverService}},
+              {path: 'infopromo', component: InfopromoComponent, data: {breadcrumb: 'infopromo'}, canActivate: [AuthGuard]},
+              {path: 'principal', component: PrincipalComponent, data: {breadcrumb: 'principal'}, canActivate: [AuthGuard]},
             ]
         },
         // tslint:disable-next-line:max-line-length
-        {path: 'detailreferentiel/:id', component: DetailreferentielComponent, canActivate: [AuthGuard], resolve: {referentiel: ReferentielResolverService}, children:
+        {path: 'detailreferentiel/:id', component: DetailreferentielComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {referentiel: ReferentielResolverService}, children:
             [
-              {path: 'updatereferentiel', component: UpdatereferentielComponent, canActivate: [AuthGuard]},
+              // tslint:disable-next-line:max-line-length
+              {path: 'updatereferentiel', component: UpdatereferentielComponent, data: {breadcrumb: 'updatereferentiel'}, canActivate: [AuthGuard]},
             ]
         },
-        {path: 'explore', component: ExploreComponent, canActivate: [AuthGuard]},
-        {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
-        {path: 'rendu', component: RenduComponent, canActivate: [AuthGuard]},
-        {path: 'brief', component: BriefComponent, canActivate: [AuthGuard]},
-        {path: 'user', component: UtilisateurComponent, canActivate: [AuthGuard]},
-        {path: 'adduser', component: AdduserComponent, canActivate: [AuthGuard]},
-        {path: 'updateuser/:id', component: UpdateuserComponent, canActivate: [AuthGuard], resolve: {user: UserResolverService}},
-        {path: 'utilisateur', component: UtilisateurComponent, canActivate: [AuthGuard], children:
+        {path: 'explore', component: ExploreComponent, data: {breadcrumb: 'explore'}, canActivate: [AuthGuard]},
+        {path: 'forum', component: ForumComponent, data: {breadcrumb: 'forum'}, canActivate: [AuthGuard]},
+        {path: 'rendu', component: RenduComponent, data: {breadcrumb: 'rendu'}, canActivate: [AuthGuard]},
+        {path: 'brief', component: BriefComponent, data: {breadcrumb: 'brief'}, canActivate: [AuthGuard]},
+        {path: 'user', component: UtilisateurComponent, data: {breadcrumb: 'user'}, canActivate: [AuthGuard]},
+        {path: 'adduser', component: AdduserComponent, data: {breadcrumb: 'adduser'}, canActivate: [AuthGuard]},
+        // tslint:disable-next-line:max-line-length
+        {path: 'updateuser/:id', component: UpdateuserComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {user: UserResolverService}},
+        // tslint:disable-next-line:max-line-length
+        {path: 'utilisateur', component: UtilisateurComponent, data: {breadcrumb: 'utilisateur'}, canActivate: [AuthGuard], children:
             [
-              {path: 'detailuser/:id', component: DetailuserComponent, canActivate: [AuthGuard], resolve: {user: UserResolverService}}
+              // tslint:disable-next-line:max-line-length
+              {path: 'detailuser/:id', component: DetailuserComponent, data: {breadcrumb: 'detail'}, canActivate: [AuthGuard], resolve: {user: UserResolverService}}
             ]
         },
-        {path: 'profil', component: ProfilComponent, canActivate: [AuthGuard], children:
+        {path: 'profil', component: ProfilComponent, data: {breadcrumb: 'profil'}, canActivate: [AuthGuard], children:
             [
-              {path: 'addprofil', component: AddprofilComponent, canActivate: [AuthGuard]},
-              {path: ':id/users', component: DetailprofilComponent, canActivate: [AuthGuard], resolve: {users: ProfilResolverService}}
-            ]
-        }
-    ]
+              {path: 'addprofil', component: AddprofilComponent, data: {breadcrumb: 'addprofil'}, canActivate: [AuthGuard]},
+              ]
+        },
+        // tslint:disable-next-line:max-line-length
+        {path: ':id/users', component: DetailprofilComponent, canActivate: [AuthGuard], data: {breadcrumb: 'users'}, resolve: {users: ProfilResolverService}}
+      ]
   },
   {path: 'login_check', component: AuthenticationComponent},
   { path: 'not-found', component: NotfoundComponent },
