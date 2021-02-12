@@ -22,7 +22,7 @@
   <tr mat-header-row *matHeaderRowDef="colonne"></tr>
   <tr mat-row *matRowDef="let row; columns: colonne;"></tr>
 </table>
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center shadow-lg">
   <mat-paginator [length]="5"
                  [pageIndex]=""
                  [pageSize]="pageSize"

@@ -55,12 +55,11 @@
                   </mat-chip>
                 </mat-chip-list>
               </mat-select-trigger>
-
               <mat-option *ngFor="let topping of grpcompetences" [value]="topping.id">{{topping.libelle}}</mat-option>
-
             </mat-select>
           </mat-form-field>
         </div>
+        <p>{{ toppingsControl.value | json }}</p>
         <div *ngIf="submitted && f.grpcompetence.errors" class="input_alert">
           <div *ngIf="f.grpcompetence.errors.required" class="alert-danger">grpcompetence is required</div>
         </div>

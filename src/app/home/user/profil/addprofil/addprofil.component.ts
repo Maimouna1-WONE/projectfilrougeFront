@@ -29,14 +29,18 @@ export class AddprofilComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Profil has been saved',
+          title: 'Referentiel has been updated',
           showConfirmButton: false,
           timer: 1500
         });
-        /*Swal.fire({
-          title: 'Poof! Your profil has been added!',
-          icon: 'success',
-        });*/
+      }
+      else{
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
       }
     });
     }

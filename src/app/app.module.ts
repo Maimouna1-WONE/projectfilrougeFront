@@ -35,7 +35,6 @@ import { UpdateuserComponent } from './home/user/utilisateur/updateuser/updateus
 import { DetailprofilComponent } from './home/user/profil/detailprofil/detailprofil.component';
 import {AddprofilsortieComponent} from './home/parametre/profilsortie/addprofilsortie/addprofilsortie.component';
 import {AddpromoComponent} from './home/parametre/promo/addpromo/addpromo.component';
-import { NiveauComponent } from './home/parametre/competence/niveau/niveau.component';
 import { GrpcompetenceitemComponent } from './home/parametre/grpcompetence/grpcompetenceitem/grpcompetenceitem.component';
 import { AddgrpcompetenceComponent } from './home/parametre/grpcompetence/addgrpcompetence/addgrpcompetence.component';
 import { UpdategrpcompetenceComponent } from './home/parametre/grpcompetence/updategrpcompetence/updategrpcompetence.component';
@@ -66,6 +65,10 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
 import { ApprenantprofilsortiepromoComponent } from './home/historique/apprenantprofilsortiepromo/apprenantprofilsortiepromo.component';
 import { ApprenantpromoprofilsortieComponent } from './home/historique/apprenantpromoprofilsortie/apprenantpromoprofilsortie.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { UpdatecompetenceComponent } from './home/parametre/competence/updatecompetence/updatecompetence.component';
+import {SearchPipe} from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,6 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     UpdateuserComponent,
     DetailprofilComponent,
     AddprofilsortieComponent,
-    NiveauComponent,
     GrpcompetenceitemComponent,
     AddgrpcompetenceComponent,
     UpdategrpcompetenceComponent,
@@ -114,7 +116,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     DetailreferentielComponent,
     ApprenantprofilsortiepromoComponent,
     ApprenantpromoprofilsortieComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    UpdatecompetenceComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -135,7 +139,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     QRCodeModule,
     AccordionModule,
     CardModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgMultiSelectDropDownModule,
+    AngularMultiSelectModule
 
   ],
   providers: [

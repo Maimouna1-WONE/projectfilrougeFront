@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Groupecompetence} from '../models/groupecompetence';
 import {Competence} from '../models/competence';
+import {Referentiel} from '../models/referentiel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,15 @@ export class GroupecompetenceService {
   {
     // @ts-ignore
     return this.http.post('/api/admin/groupecompetences', data);
+  }
+  getGrpcompetence(id: number): Observable<Groupecompetence>
+  {
+    return this.http.get<Groupecompetence>(`/api/admin/groupecompetences/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  updateOneGrpcompetence(id: number, data: FormData)
+  {
+    // @ts-ignore
+    return this.http.post(`/api/admin/groupecompetences/${id}`, data);
   }
 }

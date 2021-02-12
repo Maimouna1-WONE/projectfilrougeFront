@@ -26,9 +26,6 @@ export class HomeComponent implements OnInit{
     private dialog: MatDialog) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
-  page = 1;
-  count = 0;
-  loading = false;
   users = [] ;
   user: User =
     {
@@ -41,17 +38,7 @@ export class HomeComponent implements OnInit{
       email: ''
     };
   cour: User;
-  // tslint:disable-next-line:variable-name
-  message: string;
-  colonne: string[] = ['avatar', 'profil', 'nom', 'prenom', 'email', 'adresse', 'detail', 'update', 'delete'];
   currentUser: User;
-  pageEvent: PageEvent;
-  pageIndex: number;
-  pageSize: number;
-  nom: string; prenom: string; login: string;
-  password: string; adresse: string;
-  genre: string; telephone: string; email: string; avatar: any;
-  // tslint:disable-next-line:typedef
   info: any;
   hide = true;
   // tslint:disable-next-line:typedef

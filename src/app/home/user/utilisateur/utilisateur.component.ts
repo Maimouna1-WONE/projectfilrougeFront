@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {ProfilService} from '../../../services/profil.service';
 import {Router} from '@angular/router';
@@ -10,6 +10,7 @@ import {ExcelService} from '../../../services/excel.service';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-utilisateur',
@@ -17,6 +18,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./utilisateur.component.css']
 })
 export class UtilisateurComponent implements OnInit {
+  @ViewChild('filter', {static: false}) filter: ElementRef;
   constructor(
     private userService: UserService,
     private authenticationService: AuthenticationService,
@@ -44,6 +46,7 @@ export class UtilisateurComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   message: string;
   colonne: string[] = ['avatar', 'profil', 'nom', 'prenom', 'login', 'telephone', 'email', 'adresse', 'genre', 'actions'];
+  dataSource = new MatTableDataSource(this.users);
   currentUser: User;
   pageEvent: PageEvent;
   pageIndex: number;
@@ -75,6 +78,13 @@ export class UtilisateurComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     return event;
+  }
+  // tslint:disable-next-line:typedef
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+    // @ts-ignore
+    // this.dataSource.filter() = filterValue.trim().toLowerCase();
   }
 // tslint:disable-next-line:typedef
   getUserInfo()
@@ -112,6 +122,15 @@ export class UtilisateurComponent implements OnInit {
         },
         error => console.log('error de recuperation users')
       );
+    // tslint:disable-next-line:only-arrow-functions typedef
+    /*this.dataSource.filterPredicate = function(p, filter: any) {
+      // tslint:disable-next-line:triple-equals
+      if (filter.filterSelect == true) {
+        return (p.signingName || '').toLowerCase().includes(filter.values) ||
+          (p.serviceName || '').toLowerCase().includes(filter.values) ||
+          (p.branchName || '').toLowerCase().includes(filter.values);
+      }
+    };*/
   }
   // tslint:disable-next-line:typedef
   delete(user: User) {
@@ -139,6 +158,7 @@ export class UtilisateurComponent implements OnInit {
           'Your file has been deleted.',
           'success'
         );
+        this.refresh();
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

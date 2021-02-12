@@ -7,6 +7,7 @@ import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 // @ts-ignore
 import { UserService } from '../services/user.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,21 @@ export class AuthenticationService
   {
     return this.http.post<any>(`/api/login_check`, { 'login' : username, 'password' : password })
       .pipe(map(token => {
+        const tokenInfo = this.getInfoToken(token['token']);
+        console.log(tokenInfo);
+        if (tokenInfo.archive === false) {
           localStorage.setItem('currentUser', JSON.stringify(token));
-          const tokenInfo = this.getInfoToken(token['token']);
           localStorage.setItem('currentUserInfo', JSON.stringify(tokenInfo));
           this.currentUserSubject.next(token);
           return tokenInfo.roles[0];
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Vous n\'etes pas autorisé à se connecter!'
+          });
+        }
         })
       );
   }

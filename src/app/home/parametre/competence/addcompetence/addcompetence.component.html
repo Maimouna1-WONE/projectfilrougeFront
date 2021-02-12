@@ -8,7 +8,25 @@
         <textarea class="form-control" type="text" formControlName="libelle"></textarea>
         <label for="" class="form-label">Description</label>
         <textarea class="form-control" type="text" formControlName="description"></textarea>
-        <div formArrayName="niveau" class="form-group">
+  <div class="form-group">
+    <label class="fw-bold form-label">Groupes de Competences</label>
+    <mat-form-field>
+      <mat-select [formControl]="toppingsControl" multiple formControlName="groupeCompetences">
+        <mat-select-trigger>
+          <mat-chip-list>
+            <mat-chip *ngFor="let grpcom of toppingsControl.value" [removable]="true" (removed)="onToppingRemoved(grpcom)">
+              {{ grpcom }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-select-trigger>
+        <mat-option *ngFor="let grpcomp of grpcompetences" [value]="grpcomp.id">{{grpcomp.libelle}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/>
+    {{ toppingsControl.value | json }}
+  </div>
+  <div formArrayName="niveau" class="form-group">
           <div *ngFor="let skill of CompetenceNiveaux().controls; let skillIndex=index" style="border: red;">
             <div [formGroupName]="skillIndex">
               {{skillIndex}}
@@ -20,7 +38,7 @@
               <textarea type="text" formControlName="critereEvaluation" class="form-control"></textarea>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-primary" (click)="addCompetenceNiveau()">Add Niveau</button>
+          <button id="add" type="button" class="btn btn-outline-primary" (click)="addCompetenceNiveau(); nbclick()">Add Niveau</button>
         </div>
   <p>
     <button type="submit" class="btn btn-info">Soumettre</button>

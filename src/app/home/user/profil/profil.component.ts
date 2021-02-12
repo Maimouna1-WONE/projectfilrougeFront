@@ -78,6 +78,7 @@ export class ProfilComponent implements OnInit {
           'Your file has been deleted.',
           'success'
         );
+        this.refresh();
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -104,9 +105,20 @@ export class ProfilComponent implements OnInit {
         const prof = new Profil(this.inputmodifie);
         this.profilservice.updateOneProfil(profil.id, prof).subscribe();
         Swal.fire('Saved!', '', 'success');
+        this.refresh();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info');
       }
     });
+  }
+  // tslint:disable-next-line:typedef
+  refresh(){
+    this.profilservice.getAllprofils(0)
+      .subscribe(
+        res => {
+          this.profils = res;
+        },
+        error => console.log('error de recuperation users')
+      );
   }
 }

@@ -14,7 +14,6 @@ import {DetailuserComponent} from './home/user/utilisateur/detailuser/detailuser
 import {UtilisateurComponent} from './home/user/utilisateur/utilisateur.component';
 import {BriefComponent} from './home/brief/brief.component';
 import {RenduComponent} from './home/rendu/rendu.component';
-import {ParametreComponent} from './home/parametre/parametre.component';
 import {GrpcompetenceComponent} from './home/parametre/grpcompetence/grpcompetence.component';
 import {CompetenceComponent} from './home/parametre/competence/competence.component';
 import {GrptagComponent} from './home/parametre/grptag/grptag.component';
@@ -24,7 +23,6 @@ import {UpdateuserComponent} from './home/user/utilisateur/updateuser/updateuser
 import {DetailprofilComponent} from './home/user/profil/detailprofil/detailprofil.component';
 import {AddprofilsortieComponent} from './home/parametre/profilsortie/addprofilsortie/addprofilsortie.component';
 import {AddpromoComponent} from './home/parametre/promo/addpromo/addpromo.component';
-import {NiveauComponent} from './home/parametre/competence/niveau/niveau.component';
 import {GrpcompetenceitemComponent} from './home/parametre/grpcompetence/grpcompetenceitem/grpcompetenceitem.component';
 import {AddgrpcompetenceComponent} from './home/parametre/grpcompetence/addgrpcompetence/addgrpcompetence.component';
 import {UpdategrpcompetenceComponent} from './home/parametre/grpcompetence/updategrpcompetence/updategrpcompetence.component';
@@ -51,6 +49,8 @@ import {ApprenantprofilsortiepromoComponent} from './home/historique/apprenantpr
 import {PromoApprenantprofilsortieResolverService} from './services/promoApprenantprofilsortieResolver.service';
 import {ApprenantpromoprofilsortieComponent} from './home/historique/apprenantpromoprofilsortie/apprenantpromoprofilsortie.component';
 import {PromoApprenantpromoprofilsortieResolverService} from './services/promoApprenantpromoprofilsortieResolver.service';
+import {groupecompetenceResolverService} from './services/groupecompetenceResolver.service';
+import {UpdatecompetenceComponent} from './home/parametre/competence/updatecompetence/updatecompetence.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -67,26 +67,25 @@ const routes: Routes = [
         },
         {path: 'referentiel', component: ReferentielComponent, data: {breadcrumb: 'referentiel'}, canActivate: [AuthGuard], children:
             [
-              {path: 'updatereferentiel/:id', component: UpdatereferentielComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard]},
               // tslint:disable-next-line:max-line-length
               {path: 'referentielitem', component: ReferentielitemComponent, data: {breadcrumb: 'referentielitem'}, canActivate: [AuthGuard]}
             ]
         },
+        // tslint:disable-next-line:max-line-length
+        {path: 'updatereferentiel/:id', component: UpdatereferentielComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {referentiel: ReferentielResolverService}},
         {path: 'addreferentiel', component: AddreferentielComponent, data: {breadcrumb: 'addreferentiel'}, canActivate: [AuthGuard]},
         {path: 'grpcompetence', component: GrpcompetenceComponent, data: {breadcrumb: 'grpcompetence'}, canActivate: [AuthGuard], children:
             [
               // tslint:disable-next-line:max-line-length
               {path: 'grpcompetenceitem', component: GrpcompetenceitemComponent, data: {breadcrumb: 'grpcompetenceitem'}, canActivate: [AuthGuard]},
-              {path: 'updategrpcompetence/:1', component: UpdategrpcompetenceComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard]}
             ]
         },
+        // tslint:disable-next-line:max-line-length
+        {path: 'updategrpcompetence/:id', component: UpdategrpcompetenceComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {grpCompetence: groupecompetenceResolverService}},
         {path: 'addgrpcompetence', component: AddgrpcompetenceComponent, data: {breadcrumb: 'addgrpcompetence'}, canActivate: [AuthGuard]},
-        {path: 'competence', component: CompetenceComponent, canActivate: [AuthGuard], data: {breadcrumb: 'competence'}, children:
-            [
-              // tslint:disable-next-line:max-line-length
-              {path: ':id/niveau', component: NiveauComponent, canActivate: [AuthGuard], data: {breadcrumb: ''}, resolve: {Competence: CompetenceResolverService}},
-            ]
-        },
+        {path: 'competence', component: CompetenceComponent, canActivate: [AuthGuard], data: {breadcrumb: 'competence'}},
+        // tslint:disable-next-line:max-line-length
+        {path: 'updatecompetence/:id', component: UpdatecompetenceComponent, data: {breadcrumb: ''}, canActivate: [AuthGuard], resolve: {competenceupdate: CompetenceResolverService}},
         {path: 'addcompetence', component: AddcompetenceComponent, data: {breadcrumb: 'addcompetence'}, canActivate: [AuthGuard]},
         {path: 'grptag', component: GrptagComponent, data: {breadcrumb: 'grptag'}, canActivate: [AuthGuard]},
         {path: 'profilsortie', component: ProfilsortieComponent, data: {breadcrumb: 'profilsortie'}, canActivate: [AuthGuard], children:

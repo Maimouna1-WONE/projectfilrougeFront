@@ -4,7 +4,10 @@
   max-width: 100%;
   overflow: auto;
 }
-
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 table {
   width: 100%;
 }

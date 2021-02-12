@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-7 pt-4">{{ref.libelle}}</div>
         <div class="col">
-          <button class="btn btn-sm"><a [routerLink]="['/home/referentiel', 'updatereferentiel', ref.id]" title="modifier ce referentiel"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
+          <button class="btn btn-sm"><a [routerLink]="['/home/', 'updatereferentiel', ref.id]" title="modifier ce referentiel"><span class="material-icons" style="color: darkturquoise">create</span></a></button>
           <button class="btn btn-sm"><a (click)="deleteRef(ref)"><span class="material-icons" title="supprimer ce referentiel" style="color: red">close</span></a></button>
           <button (click)="generatePDF()" class="btn btn-sm btn-outline-danger mb-2"><i class="fa fa-file-pdf" title="Generate Pdf"></i></button>
         </div>
@@ -38,7 +38,7 @@
             </div>
           </p-header>
           <select class="form-select">
-            <option value="{{gc.id}}" *ngFor="let gc of ref['groupeCompetence']" (click)="redirect()">{{gc.libelle}}</option>
+            <option value="{{gc.id}}" *ngFor="let gc of ref.groupeCompetence" (click)="redirect()">{{gc.libelle}}</option>
           </select>
         </p-accordionTab>
       </li>

@@ -1,0 +1,36 @@
+<h2 class="text-center">Modifier cette Competence</h2>
+<hr>
+<flash-messages></flash-messages>
+
+
+<form class="form-control" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <label for="" class="form-label">Libelle</label>
+  <textarea class="form-control" type="text" [formControlName]="'libelle'"></textarea>
+  <label for="" class="form-label">Description</label>
+  <textarea class="form-control" type="text" [formControlName]="'description'"></textarea>
+  <div formArrayName="niveau" class="form-group">
+
+    <div *ngFor="let skill of CompetenceNiveaux().controls; let skillIndex=index" style="border: red;">
+      <div [formGroupName]="skillIndex">
+        {{skillIndex}}
+        <label for="" class="form-label">Libelle</label>
+        <input type="text" [formControlName]="'libelle'" class="form-control"/>
+        <label for="" class="form-label">Action</label>
+        <textarea type="text" [formControlName]="'action'" class="form-control"></textarea>
+        <label for="">Critere Evaluation</label>
+        <textarea type="text" [formControlName]="'critereEvaluation'" class="form-control"></textarea>
+        <button type="button" (click)="patchNiveauxValues(skillIndex)">PATCH VALUE</button>
+        <button type="button" (click)="resetNiveauxValues(skillIndex)">RESET VALUE</button>
+      </div>
+    </div>
+
+    <button id="add" type="button" class="btn btn-outline-primary" (click)="addCompetenceNiveau(); nbclick()">Add Niveau</button>
+  </div>
+  <p>
+    <button type="button" (click)="reset()">Reset</button>
+    <button type="submit" class="btn btn-info">Soumettre</button>
+    <button type="button" (click)="patchComp()">Patch</button>
+  </p>
+</form>
+{{this.addForm.value | json}}
+

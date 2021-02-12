@@ -1,7 +1,10 @@
-.overflow-auto{
-  max-width: 260px;
-  max-height: 300px;
-}
+
 i{
   float: right;
+}
+
+.col-6{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 242px;
 }

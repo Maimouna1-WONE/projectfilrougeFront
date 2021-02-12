@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Groupecompetence} from '../../../../models/groupecompetence';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
+import {Competence} from '../../../../models/competence';
 
 @Component({
   selector: 'app-grpcompetenceitem',
@@ -10,8 +13,10 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 })
 export class GrpcompetenceitemComponent implements OnInit {
 @Input() grpcmp: Groupecompetence;
+comp: Competence;
   constructor(private grpcompservice: GroupecompetenceService,
-              private flashmessage: FlashMessagesService) { }
+              private flashmessage: FlashMessagesService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,5 +33,19 @@ export class GrpcompetenceitemComponent implements OnInit {
           this.flashmessage.show('error', {cssClass: 'alert-danger', timeout: 1000});
         });
     }
+  }
+  // tslint:disable-next-line:typedef
+  detail(grpcomp: Groupecompetence){
+    this.grpcompservice.getGrpcompetence(grpcomp.id).subscribe(
+      res => {
+        this.comp = res.competence;
+        console.log(this.comp.libelle);
+      }
+    );
+    Swal.fire({
+    title: 'Detail de la competence',
+      html:
+        '<b>Description</b>' + this.comp.description
+  });
   }
 }

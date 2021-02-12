@@ -1,1 +1,66 @@
-<p>updatereferentiel works!</p>
+<h2 class="text-center">Ajouter un referentiel</h2>
+<hr>
+<form class="form-control" (ngSubmit)="OnSubmit()" [formGroup]="addForm">
+  <div class="row">
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Libelle <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <input  class="form-control" type="text" [formControlName]="'libelle'" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }">
+      </div>
+      <div *ngIf="submitted && f.libelle.errors" class="input_alert">
+        <div *ngIf="f.libelle.errors.required" class="alert-danger">libelle is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 fw-bold form-label" >Presentation <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <textarea class="form-control" [formControlName]="'presentation'" [ngClass]="{ 'is-invalid': submitted && f.presentation.errors }"></textarea>
+      </div>
+      <div *ngIf="submitted && f.presentation.errors" class="input_alert">
+        <div *ngIf="f.presentation.errors.required" class="alert-danger">presentation is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 fw-bold form-label" >Criteres d'evaluation <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <textarea class="form-control" [formControlName]="'critereevaluation'" [ngClass]="{ 'is-invalid': submitted && f.critereevaluation.errors }"></textarea>
+      </div>
+      <div *ngIf="submitted && f.critereevaluation.errors" class="input_alert">
+        <div *ngIf="f.critereevaluation.errors.required" class="alert-danger">critereevaluation is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 fw-bold form-label" >Criteres d'admission <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <textarea class="form-control" formControlName="critereadmission" [ngClass]="{ 'is-invalid': submitted && f.critereadmission.errors }"></textarea>
+      </div>
+      <div *ngIf="submitted && f.critereadmission.errors" class="input_alert">
+        <div *ngIf="f.critereadmission.errors.required" class="alert-danger">critereadmission is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 fw-bold form-label">Groupe de Competences <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <angular2-multiselect [settings]="dropdownSettings"
+                              [data]="grpcompetences"
+                              formControlName="grpcompetence"
+                              [(ngModel)]="selectedItems"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 fw-bold form-label">Programme</label>
+      <div class="col-sm-7">
+        <input type="file" class="form-control" formControlName="programme" (change)="onSelectFile($event)">
+      </div>
+    </div>
+  </div>
+  <div class="row btn-sm text-center mt-3">
+    <button type="submit" class="btn btn-info">Soumettre</button>
+  </div>
+</form>
+

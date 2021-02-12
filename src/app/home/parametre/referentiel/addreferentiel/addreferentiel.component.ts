@@ -48,7 +48,8 @@ programme: any;
   onToppingRemoved(topping: string) {
     const toppings = this.toppingsControl.value as string[];
     this.removeFirst(toppings, topping);
-    this.toppingsControl.setValue(toppings); // To trigger change detection
+    this.toppingsControl.setValue(toppings);
+    console.log(this.toppingsControl.value); // To trigger change detection
   }
 
   private removeFirst<T>(array: T[], toRemove: T): void {

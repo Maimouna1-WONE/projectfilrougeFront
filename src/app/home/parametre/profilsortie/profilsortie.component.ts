@@ -18,8 +18,7 @@ export class ProfilsortieComponent implements OnInit {
   pageSize: number;
   inputmodifie: string;
   profilsortie: ProfilSortie[];
-  constructor(private profilsortieservice: ProfilsortieService,
-              private flashmessage: FlashMessagesService) { }
+  constructor(private profilsortieservice: ProfilsortieService) { }
 
   // tslint:disable-next-line:typedef
   public getServerData(event?: PageEvent){
@@ -70,6 +69,7 @@ delete(ps: ProfilSortie){
         'Your file has been deleted.',
         'success'
       );
+      this.refresh();
     } else if (
       /* Read more about handling dismissals below */
       result.dismiss === Swal.DismissReason.cancel
@@ -98,9 +98,20 @@ update(ps: ProfilSortie){
       console.log(prof);
       this.profilsortieservice.updateOneProfilsortie(ps.id, prof).subscribe();
       Swal.fire('Saved!', '', 'success');
+      this.refresh();
     } else if (result.isDenied) {
       Swal.fire('Changes are not saved', '', 'info');
     }
   });
+  }
+  // tslint:disable-next-line:typedef
+  refresh(){
+    this.profilsortieservice.getAll(0)
+      .subscribe(
+        res => {
+          this.profilsortie = res;
+        },
+        error => console.log('error de recuperation users')
+      );
   }
 }

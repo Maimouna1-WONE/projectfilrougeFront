@@ -10,7 +10,7 @@ import {Profil} from '../models/profil';
 export class ReferentielService {
 
   constructor(private http: HttpClient) { }
-  getReferentielbyId(id: number): Observable<Referentiel>
+  getReferentiel(id: number): Observable<Referentiel>
   {
     return this.http.get<Referentiel>(`/api/admin/referentiels/${id}`);
   }
@@ -27,5 +27,11 @@ export class ReferentielService {
   deleteOneRef(id: number)
   {
     return this.http.delete(`/api/admin/referentiels/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  updateOneReferentiel(id: number, data: FormData)
+  {
+    // @ts-ignore
+    return this.http.post(`/api/admin/referentiels/${id}`, data);
   }
 }

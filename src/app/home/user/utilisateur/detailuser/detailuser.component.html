@@ -1,11 +1,11 @@
-
-
 <div class="container">
   <div class="row">
     <div class="col-4"></div>
     <div class="col-3 coverProfile mT20 col-xs-offset-2 dropShadow"></div>
     <div class="col">
-      <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      <a [href]="fileUrl" download="QRCode.pdf">
+        <qrcode [qrdata]="myAngularxQrCode" [size]="256" [level]="'M'"></qrcode>
+      </a>
     </div>
   </div>
 </div>

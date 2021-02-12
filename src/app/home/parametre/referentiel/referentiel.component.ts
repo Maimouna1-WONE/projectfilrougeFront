@@ -16,7 +16,6 @@ export class ReferentielComponent implements OnInit {
     this.referentielservice.getAllreferentiels().subscribe(
       res => {
         this.referentiels = res;
-        // console.log(res);
       },
       error => console.log('erreur de recuperation referentiels')
     );

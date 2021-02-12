@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Data, Params} from '@angular/router';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../../services/user.service';
-import {Observable} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FlashMessagesService} from 'angular2-flash-messages';
-
 @Component({
   selector: 'app-updateuser',
   templateUrl: './updateuser.component.html',
@@ -35,6 +33,7 @@ export class UpdateuserComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
         this.cour = data.user;
+        console.log(this.cour);
       }
     );
     this.addForm = this.formBuilder.group({
@@ -54,6 +53,7 @@ export class UpdateuserComponent implements OnInit {
         login: this.cour.login,
         adresse: this.cour.adresse,
         nom: this.cour.nom,
+        password: this.cour.password,
         prenom: this.cour.prenom,
         email: this.cour.email,
         telephone: this.cour.telephone,
@@ -70,14 +70,14 @@ export class UpdateuserComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit(){
     this.submitted = true;
-    const {nom, login, password, prenom, adresse, telephone, email, genre} = this.addForm.value;
+    const {nom, login, prenom, adresse, telephone, email, genre} = this.addForm.value;
     const user = new FormData();
     if (!this.avatar){
       this.avatar = this.cour.avatar;
     }
     user.append('nom', nom);
     user.append('login', login);
-    user.append('password', password);
+    //user.append('password', password);
     user.append('prenom', prenom);
     user.append('adresse', adresse);
     user.append('telephone', telephone);

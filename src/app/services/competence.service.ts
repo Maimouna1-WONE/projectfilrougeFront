@@ -22,4 +22,14 @@ export class CompetenceService {
     // @ts-ignore
     return this.http.post<Competence>('/api/admin/competences', data);
   }
+  // tslint:disable-next-line:typedef
+  deleteOneCompetence(id: number)
+  {
+    return this.http.delete(`/api/admin/competences/${id}`);
+  }
+  UpdateCompetence(id: number, data: Object): Observable<Competence>
+  {
+    // @ts-ignore
+    return this.http.put<Competence>(`/api/admin/competences/${id}`, data);
+  }
 }
