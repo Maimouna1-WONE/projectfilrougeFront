@@ -51,6 +51,8 @@ import {ApprenantpromoprofilsortieComponent} from './home/historique/apprenantpr
 import {PromoApprenantpromoprofilsortieResolverService} from './services/promoApprenantpromoprofilsortieResolver.service';
 import {groupecompetenceResolverService} from './services/groupecompetenceResolver.service';
 import {UpdatecompetenceComponent} from './home/parametre/competence/updatecompetence/updatecompetence.component';
+import {AddgroupeComponent} from './home/historique/addgroupe/addgroupe.component';
+import {UpdatepasswordComponent} from './home/updatepassword/updatepassword.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -59,6 +61,8 @@ const routes: Routes = [
   {path: 'apprenant', component: ApprenantComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Home'}, children:
       [
+        // tslint:disable-next-line:max-line-length
+        {path: 'updatepassword/:id', component: UpdatepasswordComponent, data: {breadcrumb: 'updatepassword'}, canActivate: [AuthGuard], resolve: {updatepassword: UserResolverService}},
         {path: 'parametre', component: ProfilsortieComponent, data: {breadcrumb: 'parametre'}, canActivate: [AuthGuard]},
         {path: 'promo', component: PromoComponent, data: {breadcrumb: 'promo'}, canActivate: [AuthGuard], children:
             [
@@ -94,6 +98,7 @@ const routes: Routes = [
               {path: 'addprofilsortie', component: AddprofilsortieComponent, data: {breadcrumb: 'addprofilsortie'}, canActivate: [AuthGuard]},
             ]
         },
+        {path: 'addgroupe', component: AddgroupeComponent, data: {breadcrumb: 'addgroupe'}, canActivate: [AuthGuard]},
         {path: 'historique', component: HistoriqueComponent, data: {breadcrumb: 'historique'}, canActivate: [AuthGuard], children:
             [
               // tslint:disable-next-line:max-line-length

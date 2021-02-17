@@ -1,6 +1,5 @@
-<h2 class="text-center">Ajouter un referentiel</h2>
+<h2 class="text-center text-info">Ajouter un referentiel</h2>
 <hr>
-<flash-messages></flash-messages>
 <form class="form-control" (ngSubmit)="OnSubmit()" [formGroup]="addForm">
   <div class="row">
     <div class="form-group row mb-3">
@@ -59,16 +58,15 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <p>{{ toppingsControl.value | json }}</p>
         <div *ngIf="submitted && f.grpcompetence.errors" class="input_alert">
           <div *ngIf="f.grpcompetence.errors.required" class="alert-danger">grpcompetence is required</div>
         </div>
     </div>
-      <div class="form-group row mb-3">
-        <label class="col-sm-4 fw-bold form-label">Programme</label>
-        <div class="col-sm-7">
-          <input type="file" class="form-control" formControlName="programme" (change)="onSelectFile($event)">
-        </div>
+    <div class="form-group row mt-3">
+      <div class="file-input">
+        <input type="file" id="file" class="file" [formControlName]="'programme'" (change)="onSelectFile($event)">
+        <label for="file" class="pt-3">Add Programme <i class="fa fa-file-pdf"></i></label>
+      </div>
     </div>
   </div>
   <div class="row btn-sm text-center mt-3">

@@ -63,4 +63,12 @@ export class PromoService {
   {
     return this.http.get(`/api/admin/profilssorties`);
   }
+  getPromobyId(id: number): Observable<Promo>
+  {
+    return this.http.get<Promo>(`/api/admin/promos/${id}`);
+  }
+  getPromoencours(): Observable<Promo[]>
+  {
+    return this.http.get<Promo[]>(`/api/admin/promos/encours`);
+  }
 }

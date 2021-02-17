@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {CompetenceService} from '../../../../services/competence.service';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
 import {Groupecompetence} from '../../../../models/groupecompetence';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addcompetence',
@@ -19,10 +20,10 @@ grpcompetences: Groupecompetence[];
               private competenceservice: CompetenceService,
               private grpcompetenceservice: GroupecompetenceService) {
     this.addForm = this.fb.group({
-      libelle: '',
-      description: '',
-      groupeCompetences: new FormControl([]),
-      niveau: this.fb.array([])
+      libelle: ['', Validators.required],
+      description: ['', Validators.required],
+      groupeCompetences: new FormControl([], Validators.required),
+      niveau: this.fb.array([], Validators.required)
     });
   }
 // tslint:disable-next-line:typedef
@@ -32,9 +33,19 @@ grpcompetences: Groupecompetence[];
         this.grpcompetences = res;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
+  }
+  // tslint:disable-next-line:typedef
+  get f()
+  {
+    return this.addForm.controls;
   }
   // tslint:disable-next-line:typedef
   /*addCompetence() {
@@ -62,9 +73,9 @@ grpcompetences: Groupecompetence[];
   }
   newNiveau(): FormGroup {
     return this.fb.group({
-      libelle: '',
-      action: '',
-      critereEvaluation: '',
+      libelle: ['', Validators.required],
+      action: ['', Validators.required],
+      critereEvaluation: ['', Validators.required],
     });
   }
   // tslint:disable-next-line:typedef
@@ -91,10 +102,21 @@ grpcompetences: Groupecompetence[];
     console.log(this.addForm.value);
     this.competenceservice.addCompetence(this.addForm.value).subscribe(
       res => {
-        console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'User has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }

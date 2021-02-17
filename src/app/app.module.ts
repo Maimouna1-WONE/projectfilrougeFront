@@ -69,6 +69,9 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import { UpdatecompetenceComponent } from './home/parametre/competence/updatecompetence/updatecompetence.component';
 import {SearchPipe} from './search.pipe';
+import {MaterialFileInputModule} from 'ngx-material-file-input';
+import { AddgroupeComponent } from './home/historique/addgroupe/addgroupe.component';
+import { UpdatepasswordComponent } from './home/updatepassword/updatepassword.component';
 
 @NgModule({
   declarations: [
@@ -118,32 +121,35 @@ import {SearchPipe} from './search.pipe';
     ApprenantpromoprofilsortieComponent,
     BreadcrumbComponent,
     UpdatecompetenceComponent,
-    SearchPipe
+    SearchPipe,
+    AddgroupeComponent,
+    UpdatepasswordComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgxPaginationModule,
-    materialModule,
-    FlashMessagesModule.forRoot(),
-    TableModule,
-    InputTextModule,
-    DropdownModule,
-    ButtonModule,
-    RippleModule,
-    MenubarModule,
-    DataTablesModule,
-    QRCodeModule,
-    AccordionModule,
-    CardModule,
-    PdfViewerModule,
-    NgMultiSelectDropDownModule,
-    AngularMultiSelectModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgxPaginationModule,
+        materialModule,
+        FlashMessagesModule.forRoot(),
+        TableModule,
+        InputTextModule,
+        DropdownModule,
+        ButtonModule,
+        RippleModule,
+        MenubarModule,
+        DataTablesModule,
+        QRCodeModule,
+        AccordionModule,
+        CardModule,
+        PdfViewerModule,
+        NgMultiSelectDropDownModule,
+        AngularMultiSelectModule,
+        MaterialFileInputModule
 
-  ],
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

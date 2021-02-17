@@ -4,6 +4,7 @@ import {User} from '../../../../models/user';
 import {UserService} from '../../../../services/user.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-updateuser',
   templateUrl: './updateuser.component.html',
@@ -21,11 +22,10 @@ export class UpdateuserComponent implements OnInit {
   user: User;
   cour: User;
   hide: boolean;
-  url = '';
+  url = '../../../../../assets/unnamed.png';
   constructor(private route: ActivatedRoute,
               private userservice: UserService,
-              private formBuilder: FormBuilder,
-              private flashmessage: FlashMessagesService)
+              private formBuilder: FormBuilder)
   {
   }
   // @ts-ignore
@@ -33,7 +33,6 @@ export class UpdateuserComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
         this.cour = data.user;
-        console.log(this.cour);
       }
     );
     this.addForm = this.formBuilder.group({
@@ -58,7 +57,7 @@ export class UpdateuserComponent implements OnInit {
         email: this.cour.email,
         telephone: this.cour.telephone,
         genre: this.cour.genre,
-        avatar: this.url
+        avatar: this.avatar
       }
     );
   }
@@ -72,9 +71,6 @@ export class UpdateuserComponent implements OnInit {
     this.submitted = true;
     const {nom, login, prenom, adresse, telephone, email, genre} = this.addForm.value;
     const user = new FormData();
-    if (!this.avatar){
-      this.avatar = this.cour.avatar;
-    }
     user.append('nom', nom);
     user.append('login', login);
     //user.append('password', password);
@@ -83,13 +79,29 @@ export class UpdateuserComponent implements OnInit {
     user.append('telephone', telephone);
     user.append('email', email);
     user.append('genre', genre);
-    user.append('avatar', this.avatar);
+    if (!this.avatar){
+      this.avatar = this.cour.avatar;
+    }
+    else{
+      user.append('avatar', this.avatar);
+    }
     this.userservice.updateOneUser(this.cour.id, user).subscribe(
         res => {
-          this.flashmessage.show('Modification reussie', {cssClass: 'alert-success', timeout: 1000});
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'User has been updated',
+            showConfirmButton: false,
+            timer: 1500
+          });
         },
         error => {
-          this.flashmessage.show('echec', {cssClass: 'alert-danger', timeout: 1000});
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
         }
       );
   }

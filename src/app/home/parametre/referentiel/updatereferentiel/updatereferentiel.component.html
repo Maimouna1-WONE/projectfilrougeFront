@@ -1,4 +1,4 @@
-<h2 class="text-center">Ajouter un referentiel</h2>
+<h2 class="text-center text-info">Modifier un referentiel</h2>
 <hr>
 <form class="form-control" (ngSubmit)="OnSubmit()" [formGroup]="addForm">
   <div class="row">
@@ -51,16 +51,19 @@
                               (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 
       </div>
+      <div *ngIf="submitted && f.grpcompetence.errors" class="input_alert">
+        <div *ngIf="f.grpcompetence.errors.required" class="alert-danger">grpcompetence is required</div>
+      </div>
     </div>
-    <div class="form-group row mb-3">
-      <label class="col-sm-4 fw-bold form-label">Programme</label>
-      <div class="col-sm-7">
-        <input type="file" class="form-control" formControlName="programme" (change)="onSelectFile($event)">
+    <div class="form-group row mt-3">
+      <div class="file-input">
+        <input type="file" id="file" class="file" [formControlName]="'programme'" (change)="onSelectFile($event)">
+        <label for="file" class="pt-3">Add Programme <i class="fa fa-file-pdf"></i></label>
       </div>
     </div>
   </div>
   <div class="row btn-sm text-center mt-3">
-    <button type="submit" class="btn btn-info">Soumettre</button>
+    <button type="submit" class="btn btn-warning">Soumettre</button>
   </div>
 </form>
 

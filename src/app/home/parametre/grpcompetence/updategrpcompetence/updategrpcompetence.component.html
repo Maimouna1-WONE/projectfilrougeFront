@@ -1,4 +1,4 @@
-<h2 class="text-center">Modifier ce Groupe de competence</h2>
+<h2 class="text-center text-info">Modifier ce Groupe de competence</h2>
 <hr>
 <form class="form-control" (ngSubmit)="OnSubmit()" [formGroup]="addForm">
   <div class="row">
@@ -14,7 +14,7 @@
     <div class="form-group row mb-3">
       <label class="col-sm-4 col-form-label fw-bold">Description <label style="color: red">*</label></label>
       <div class="col-sm-7">
-        <input  class="form-control" type="text" [formControlName]="'description'" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+        <textarea  class="form-control" type="text" [formControlName]="'description'" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
       </div>
       <div *ngIf="submitted && f.description.errors" class="input_alert">
         <div *ngIf="f.description.errors.required" class="alert-danger">Description is required</div>
@@ -32,10 +32,13 @@
                                 (onSelectAll)="onSelectAll($event)"
                                 (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
         </div>
+        <div *ngIf="submitted && f.competence.errors" class="input_alert">
+          <div *ngIf="f.competence.errors.required" class="alert-danger">Competence is required</div>
+        </div>
       </div>
   </div>
   <div class="row btn-sm text-center">
-    <button type="submit" class="btn btn-info">Soumettre</button>
+    <button type="submit" class="btn btn-warning">Soumettre</button>
   </div>
 </form>
 

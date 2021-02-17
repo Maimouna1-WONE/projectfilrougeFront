@@ -50,12 +50,12 @@ cour: Groupecompetence;
     this.addForm = this.formbuilder.group({
       libelle: ['', Validators.required],
       description: ['', Validators.required],
-      competence: ['', Validators.required]
+      competence: [[], Validators.required]
     });
     this.addForm = this.formbuilder.group({
       libelle: ['', Validators.required],
       description: ['', Validators.required],
-      competence: ['', Validators.required],
+      competence: [[], Validators.required],
     });
     this.addForm.patchValue(
       {

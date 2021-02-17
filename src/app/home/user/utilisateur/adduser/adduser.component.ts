@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Profil} from '../../../../models/profil';
-import {Router} from '@angular/router';
 import {UserService} from '../../../../services/user.service';
-import {ProfilService} from '../../../../services/profil.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adduser',
@@ -16,21 +14,18 @@ export class AdduserComponent implements OnInit {
   addForm: FormGroup;
   hide = true;
   nom: string; prenom: string; login: string;
-  password: string; adresse: string;
+  adresse: string;
   genre: string; telephone: string;
   profil: Profil; email: string; avatar: any;
   message: string;
   url = '../../../../../assets/unnamed.png';
   constructor(private formBuilder: FormBuilder,
-              private userservice: UserService,
-              private profilservice: ProfilService,
-              private flashmessage: FlashMessagesService) { }
+              private userservice: UserService) { }
 
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
       nom: ['', Validators.required],
       login: ['', Validators.required],
-      password: ['', Validators.required],
       prenom: ['', Validators.required],
       adresse: ['', Validators.required],
       telephone: ['', Validators.required],
@@ -48,11 +43,11 @@ export class AdduserComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit(){
     this.submitted = true;
-    const {nom, login, password, prenom, adresse, telephone, email, genre, profil} = this.addForm.value;
+    const {nom, login, prenom, adresse, telephone, email, genre, profil} = this.addForm.value;
     const user = new FormData();
     user.append('nom', nom);
     user.append('login', login);
-    user.append('password', password);
+    //user.append('password', password);
     user.append('prenom', prenom);
     user.append('adresse', adresse);
     user.append('telephone', telephone);
@@ -62,11 +57,21 @@ export class AdduserComponent implements OnInit {
     user.append('avatar', this.avatar);
     this.userservice.addUser(user).subscribe(
       res => {
-        this.flashmessage.show('Ajout reussie', {cssClass: 'alert-success', timeout: 1000});
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'User has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error => {
-        this.flashmessage.show('error', {cssClass: 'alert-danger', timeout: 1000});
-
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
       );
   }

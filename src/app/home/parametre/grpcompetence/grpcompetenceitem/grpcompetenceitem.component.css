@@ -57,3 +57,16 @@ img{
 .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
   transform: scale3d(1, 1, 1);
 }
+
+h5 {
+  display: table;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 15px;
+}
+h5:before, h5:after {
+  content: " ";
+  display: table-cell;
+  width: 50%;
+  background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) repeat-x left center;
+}

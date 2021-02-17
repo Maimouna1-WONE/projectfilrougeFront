@@ -25,6 +25,10 @@ export class UserService{
   {
     return this.http.get<User>(`/api/admin/users/${id}`);
   }
+  getQrcode(id: number): Observable<User>
+  {
+    return this.http.get<User>(`/api/admin/users/${id}/qrcode`);
+  }
   // tslint:disable-next-line:typedef
   deleteOneUser(id: number)
   {

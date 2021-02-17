@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CompetenceService} from '../../../../services/competence.service';
 import {Competence} from '../../../../models/competence';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addgrpcompetence',
@@ -31,20 +32,29 @@ competences: Competence[];
       array.splice(index, 1);
     }
   }
+  // tslint:disable-next-line:typedef
+  get f()
+  {
+    return this.addForm.controls;
+  }
   ngOnInit(): void {
     this.competenceservice.getAllcompetence().subscribe(
       res => {
-        //console.log(res);
         this.competences = res;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
     this.addForm = this.fb.group({
-      libelle: '',
-      description: '',
-      competence: new FormControl([])
+      libelle: ['', Validators.required],
+      description: ['', Validators.required],
+      competence: new FormControl([], Validators.required)
     });
   }
   // tslint:disable-next-line:typedef
@@ -55,10 +65,21 @@ competences: Competence[];
     console.log(this.addForm.value);
     this.grpcompetenceservice.addGrpCompetence(this.addForm.value).subscribe(
       res => {
-        console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Groupe de Competence has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }

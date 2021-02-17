@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Groupecompetence} from '../../../../models/groupecompetence';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {Competence} from '../../../../models/competence';
 
@@ -14,38 +12,45 @@ import {Competence} from '../../../../models/competence';
 export class GrpcompetenceitemComponent implements OnInit {
 @Input() grpcmp: Groupecompetence;
 comp: Competence;
-  constructor(private grpcompservice: GroupecompetenceService,
-              private flashmessage: FlashMessagesService,
-              private router: Router) { }
+  constructor(private grpcompservice: GroupecompetenceService) { }
 
   ngOnInit(): void {
   }
   // tslint:disable-next-line:typedef
   deleteGrpComp(grpcmp: Groupecompetence){
-    const res = confirm('Êtes-vous sûr de vouloir supprimer?');
-    if (res) {
-      this.grpcompservice.deleteOnegrpcomp(grpcmp.id).subscribe(
-        res => {
-          this.flashmessage.show('Suppression reussie', {cssClass: 'alert-success', timeout: 1000});
-          window.location.reload();
-        },
-        error => {
-          this.flashmessage.show('error', {cssClass: 'alert-danger', timeout: 1000});
-        });
-    }
-  }
-  // tslint:disable-next-line:typedef
-  detail(grpcomp: Groupecompetence){
-    this.grpcompservice.getGrpcompetence(grpcomp.id).subscribe(
-      res => {
-        this.comp = res.competence;
-        console.log(this.comp.libelle);
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success m-3',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.grpcompservice.deleteOnegrpcomp(grpcmp.id).subscribe();
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        );
       }
-    );
-    Swal.fire({
-    title: 'Detail de la competence',
-      html:
-        '<b>Description</b>' + this.comp.description
-  });
+    });
   }
 }

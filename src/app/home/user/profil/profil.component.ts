@@ -36,7 +36,12 @@ export class ProfilComponent implements OnInit {
         this.profils = res;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
     this.pageIndex = event.pageIndex;
@@ -49,7 +54,14 @@ export class ProfilComponent implements OnInit {
         res => {
           this.profils = res;
         },
-        error => console.log('erreur de recuperation profils')
+        error => {
+          Swal.fire({
+            title: 'Error recuperation!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
+        }
       );
   }
   // tslint:disable-next-line:typedef
@@ -102,9 +114,20 @@ export class ProfilComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.inputmodifie = document.getElementById('td' + profil.id).textContent;
-        const prof = new Profil(this.inputmodifie);
-        this.profilservice.updateOneProfil(profil.id, prof).subscribe();
-        Swal.fire('Saved!', '', 'success');
+        // tslint:disable-next-line:triple-equals
+        if (this.inputmodifie != ''){
+          const prof = new Profil(this.inputmodifie);
+          this.profilservice.updateOneProfil(profil.id, prof).subscribe();
+          Swal.fire('Saved!', '', 'success');
+        }
+        else{
+          Swal.fire({
+            title: 'the field must not be empty',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
+        }
         this.refresh();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info');
@@ -118,7 +141,14 @@ export class ProfilComponent implements OnInit {
         res => {
           this.profils = res;
         },
-        error => console.log('error de recuperation users')
+        error => {
+          Swal.fire({
+            title: 'Error recuperation!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
+        }
       );
   }
 }

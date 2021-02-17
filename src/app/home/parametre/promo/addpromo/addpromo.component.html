@@ -2,8 +2,11 @@
 <hr>
 <form class="form-control" [formGroup]="addForm" (ngSubmit)="OnSubmit()">
   <div class="row">
-    <div class="col-12">
-      <img src="{{url}}" class="rounded-circle border border-info w-25 h-25" alt="pp">
+    <div class="col-12 text-center h-25 mb-5">
+      <img src="{{url}}" *ngIf="!avatar; else other" class="rounded-circle border border-info w-25 h-25" alt="pp">
+      <ng-template #other>
+        <img src="{{url}}" class="w-50 h-50" alt="pp">
+      </ng-template>
     </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Choix de la langue <label style="color: red">*</label></label>
@@ -13,6 +16,9 @@
             <option value="anglais">Anglais</option>
           </select>
         </div>
+        <div *ngIf="submitted && f.langue.errors.required" class="input_alert">
+          <div class="alert-danger">Choisir une langue</div>
+        </div>
       </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Choix de la fabrique <label style="color: red">*</label></label>
@@ -21,41 +27,44 @@
             <option value="Sonatel Academy">Sonatel Academy</option>
           </select>
         </div>
+        <div *ngIf="submitted && f.fabrique.errors.required" class="input_alert">
+          <div class="alert-danger">Choisir la fabrique</div>
+        </div>
       </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Libelle <label style="color: red">*</label></label>
         <div class="col-sm-7">
-          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" type="text" [formControlName]="'libelle'" placeholder="libelle" >
+          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" type="text" [formControlName]="'libelle'">
         </div>
         <div *ngIf="submitted && f.libelle.errors" class="input_alert">
-          <div *ngIf="f.libelle.errors.required || f.libelle.errors.required" class="alert-danger">Veillez entrer le libelle</div>
+          <div *ngIf="submitted && f.libelle.errors.required" class="alert-danger">Veillez entrer le libelle</div>
         </div>
       </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Lieu de la promotion</label>
         <div class="col-sm-7">
-          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lieu.errors }" type="text" [formControlName]="'lieu'" placeholder="lieu">
+          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lieu.errors }" type="text" [formControlName]="'lieu'">
         </div>
         <div *ngIf="submitted && f.lieu.errors" class="input_alert">
-          <div *ngIf="f.lieu.errors.required || f.lieu.errors.required" class="alert-danger">Veillez entrer le lieu de la promo</div>
+          <div *ngIf="submitted && f.lieu.errors.required" class="alert-danger">Veillez entrer le lieu de la promo</div>
         </div>
       </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Description <label style="color: red">*</label></label>
         <div class="col-sm-7">
-          <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" type="text" [formControlName]="'description'" placeholder="description"></textarea>
+          <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" type="text" [formControlName]="'description'"></textarea>
         </div>
         <div *ngIf="submitted && f.description.errors" class="input_alert">
-          <div *ngIf="f.description.errors.required || f.description.errors.required" class="alert-danger">Veillez entrer la description de la promo</div>
+          <div *ngIf="submitted && f.description.errors.required" class="alert-danger">Veillez entrer la description de la promo</div>
         </div>
       </div>
       <div class="form-group row mb-3">
         <label class="fw-bold form-label col-sm-4">Reference Agate <label style="color: red">*</label></label>
         <div class="col-sm-7">
-          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reference_agate.errors }" type="text" [formControlName]="'reference_agate'" placeholder="reference agate">
+          <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reference_agate.errors }" type="text" [formControlName]="'reference_agate'">
         </div>
         <div *ngIf="submitted && f.reference_agate.errors" class="input_alert">
-          <div *ngIf="f.reference_agate.errors.required || f.reference_agate.errors.required" class="alert-danger">Veillez entrer la reference</div>
+          <div *ngIf="submitted && f.reference_agate.errors.required" class="alert-danger">Veillez entrer la reference</div>
         </div>
       </div>
       <div class="form-group row mb-3">
@@ -64,57 +73,66 @@
           <input  class="form-control" type="date"  [ngClass]="{ 'is-invalid': submitted && f.date_fin.errors }" [formControlName]="'date_fin'">
         </div>
         <div *ngIf="submitted && f.date_fin.errors" class="input_alert">
-          <div *ngIf="f.date_fin.errors.required || f.date_fin.errors.required" class="alert-danger">Veillez entrer la date de fin</div>
+          <div *ngIf="submitted && f.date_fin.errors.required" class="alert-danger">Veillez entrer la date de fin</div>
         </div>
       </div>
       <div class="form-group row mb-3">
-        <label class="fw-bold form-label col-sm-4">Referentiel</label>
+        <label class="fw-bold form-label col-sm-4">Referentiel <label style="color: red">*</label></label>
         <div class="col-sm-7">
-          <label class="form-check-label" *ngFor="let ref of referentiels">
-            <input [formControlName]="'referentiel'" type="radio" class="form-check-input" name="referentiel" id="{{ref.id}}" [value]="ref.id">
-            {{ref.libelle}}
-          </label>
+            <ul *ngFor="let ref of referentiels" class="row">
+              <li class="col-1 rounded-3 mb-2">
+                <input type="radio" [value]="ref.id" formControlName="referentiel" id="s-option{{ref.id}}" name="selector" [ngClass]="{ 'is-invalid': submitted && f.referentiel.errors }">
+                <label for="s-option{{ref.id}}">{{ref.libelle}}</label>
+                <div class="check"></div>
+              </li>
+            </ul>
+        </div>
+        <div *ngIf="submitted && f.referentiel.errors" class="input_alert">
+          <div *ngIf="submitted && f.referentiel.errors.required" class="alert-danger">Veillez choisir un referentiel</div>
         </div>
       </div>
       <div class="form-group row mb-3">
-        <label class="fw-bold form-label col-sm-4">avatar</label>
-        <div class="col-sm-7">
-          <input class="form-control" type="file" [formControlName]="'avatar'" (change)="onSelectFile($event)">
-        </div>
+          <div class="file-input">
+            <input type="file" id="file" class="file" [formControlName]="'avatar'" (change)="onSelectFile($event)">
+            <label for="file" class="pt-3">Select Avatar de la promo</label>
+          </div>
       </div>
-    <div class="row">
-      <div class="col-6 form-group" formArrayName="apprenant">
-        <h2>Ajout d'apprenants</h2>
+    <div class="form-group mb-3 row">
+      <label class="fw-bold form-label">Ajouter des apprenants ou importer un CSV <label style="color: red">*</label></label>
+    </div>
+    <div class="row text-center">
+      <div class="col-6 form-group" formArrayName="apprenant" [ngClass]="{ 'is-invalid': submitted && f.apprenant.errors }">
         <div *ngFor="let skill of promogroupe().controls; let skillIndex=index" style="border: red;">
           <div [formGroupName]="skillIndex">
-            <label class="fw-bold form-label">Email <label style="color: red">*</label></label>
             <div class="row">
               <div class="col-6">
+                <label class="fw-bold form-label">Email <label style="color: red">*</label></label>
                 <input type="text" class="form-control" [formControlName]="'app'" [ngClass]="{ 'is-invalid': submitted && f.app.errors }" >
-              <div *ngIf="submitted && f.app.errors" class="input_alert">
-                <div *ngIf="f.app.errors.required || f.app.errors.required" class="alert-danger">Veillez entrer l'adresse email</div>
+              <div *ngIf="submitted && skill.get('app').hasError('required')" class="input_alert">
+                <div class="alert-danger">Veillez entrer l'adresse email</div>
               </div>
-
               </div>
             </div>
           </div>
         </div>
         <button type="button" class="btn btn-outline-secondary" (click)="addApprenant()">Ajouter des apprenants</button>
       </div>
-      <div class="col-6">
-        <label for="" class="form-label">Importer un ficher CSV</label>
-        <input type="file" [formControlName]="'document'" (change)="File($event)">
+      <div class="col">
+        <div class="vl"></div>
+      </div>
+      <div class="col-5">
+        <div class="file-input">
+          <input type="file" id="file1" class="file1" [formControlName]="'document'" (change)="File($event)">
+          <label for="file1" class="pt-2" style="width: 20%; float: right; background-color: green"><i class="fa fa-2x fa-file-excel"></i></label>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <button type="submit" class="btn btn-outline-danger" style="float: left">Annuler</button>
-      </div>
-      <div class="col-6">
-        <button type="submit" class="btn btn-info" style="float: right">Soumettre</button>
-      </div>
+    <div *ngIf="submitted && f.apprenant.errors.required" class="input_alert">
+      <div class="alert-danger">Veillez entrer Ajouter des apprenants</div>
     </div>
   </div>
+  <div class="row btn-sm text-center mt-3">
+    <button type="submit" class="btn btn-info">Soumettre</button>
+  </div>
 </form>
-<p>{{this.addForm.value | json}}</p>
 

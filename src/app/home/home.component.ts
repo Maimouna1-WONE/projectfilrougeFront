@@ -4,11 +4,6 @@ import { Router } from '@angular/router';
 import {UserService} from '../services/user.service';
 import {ProfilService} from '../services/profil.service';
 import {User} from '../models/user';
-import {PageEvent} from '@angular/material/paginator';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {DetailuserComponent} from './user/utilisateur/detailuser/detailuser.component';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {from, Observable, of, Subject} from 'rxjs';
 
 
 @Component({
@@ -22,8 +17,7 @@ export class HomeComponent implements OnInit{
     private authenticationService: AuthenticationService,
     private userservice: UserService,
     private profilservice: ProfilService,
-    private router: Router, private flashmessage: FlashMessagesService,
-    private dialog: MatDialog) {
+    private router: Router) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
   users = [] ;

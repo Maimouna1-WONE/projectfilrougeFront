@@ -72,19 +72,17 @@ export class UtilisateurComponent implements OnInit {
         this.users = res;
       },
       error => {
-        console.log('error');
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     return event;
-  }
-  // tslint:disable-next-line:typedef
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue);
-    // @ts-ignore
-    // this.dataSource.filter() = filterValue.trim().toLowerCase();
   }
 // tslint:disable-next-line:typedef
   getUserInfo()
@@ -95,42 +93,21 @@ export class UtilisateurComponent implements OnInit {
   // tslint:disable-next-line:typedef use-lifecycle-interface
   ngOnInit()
   {
-    // tslint:disable-next-line:only-arrow-functions typedef
-    jQuery(document).ready(function() {
-      // tslint:disable-next-line:prefer-const
-      let btn = $('#button');
-      // tslint:disable-next-line:only-arrow-functions typedef
-      $(window).scroll(function() {
-        if ($(window).scrollTop() > 300) {
-          btn.addClass('show');
-        } else {
-          btn.removeClass('show');
-        }
-      });
-      // tslint:disable-next-line:only-arrow-functions typedef
-      btn.on('click', function(e) {
-        e.preventDefault();
-        $('html, body').animate({scrollTop: 0}, '300');
-      });
-    });
     this.val = this.getUserInfo();
     this.userService.getAll(0)
       .subscribe(
         res => {
           this.users = res;
-          console.log(this.users);
         },
-        error => console.log('error de recuperation users')
+        error => {
+          Swal.fire({
+            title: 'Error recuperation!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
+        }
       );
-    // tslint:disable-next-line:only-arrow-functions typedef
-    /*this.dataSource.filterPredicate = function(p, filter: any) {
-      // tslint:disable-next-line:triple-equals
-      if (filter.filterSelect == true) {
-        return (p.signingName || '').toLowerCase().includes(filter.values) ||
-          (p.serviceName || '').toLowerCase().includes(filter.values) ||
-          (p.branchName || '').toLowerCase().includes(filter.values);
-      }
-    };*/
   }
   // tslint:disable-next-line:typedef
   delete(user: User) {
@@ -181,7 +158,14 @@ export class UtilisateurComponent implements OnInit {
         res => {
           this.users = res;
         },
-        error => console.log('error de recuperation users')
+        error => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to refresh',
+            icon: 'error',
+            confirmButtonText: 'Yes'
+          });
+        }
       );
   }
   // tslint:disable-next-line:typedef

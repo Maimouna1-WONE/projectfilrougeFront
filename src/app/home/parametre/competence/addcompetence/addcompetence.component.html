@@ -1,47 +1,96 @@
-<h2 class="text-center">Ajouter une Competence</h2>
+<h2 class="text-center text-info">Ajouter une Competence</h2>
 <hr>
 <flash-messages></flash-messages>
 
 
 <form class="form-control" [formGroup]="addForm" (ngSubmit)="onSubmit()">
-  <label for="" class="form-label">Libelle</label>
-        <textarea class="form-control" type="text" formControlName="libelle"></textarea>
-        <label for="" class="form-label">Description</label>
-        <textarea class="form-control" type="text" formControlName="description"></textarea>
-  <div class="form-group">
-    <label class="fw-bold form-label">Groupes de Competences</label>
-    <mat-form-field>
-      <mat-select [formControl]="toppingsControl" multiple formControlName="groupeCompetences">
-        <mat-select-trigger>
-          <mat-chip-list>
-            <mat-chip *ngFor="let grpcom of toppingsControl.value" [removable]="true" (removed)="onToppingRemoved(grpcom)">
-              {{ grpcom }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-        </mat-select-trigger>
-        <mat-option *ngFor="let grpcomp of grpcompetences" [value]="grpcomp.id">{{grpcomp.libelle}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br/>
-    {{ toppingsControl.value | json }}
-  </div>
-  <div formArrayName="niveau" class="form-group">
+  <div class="row">
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold" >Libelle <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <input class="form-control" type="text" formControlName="libelle" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }"/>
+      </div>
+      <div *ngIf="submitted && f.libelle.errors" class="input_alert">
+        <div *ngIf="f.libelle.errors.required" class="alert-danger">Libelle is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Description<label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <textarea class="form-control" type="text" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+      </div>
+      <div *ngIf="submitted && f.description.errors" class="input_alert">
+        <div *ngIf="f.description.errors.required" class="alert-danger">Description is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Groupes de Competences<label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <mat-form-field>
+          <mat-select [formControl]="toppingsControl" multiple formControlName="groupeCompetences">
+            <mat-select-trigger>
+              <mat-chip-list>
+                <mat-chip *ngFor="let grpcom of toppingsControl.value" [removable]="true" (removed)="onToppingRemoved(grpcom)">
+                  {{ grpcom }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </mat-select-trigger>
+            <mat-option *ngFor="let grpcomp of grpcompetences" [value]="grpcomp.id">{{grpcomp.libelle}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="submitted && f.groupeCompetences.errors" class="input_alert">
+        <div *ngIf="f.groupeCompetences.errors.required" class="alert-danger">Groupe de competences is required</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Niveaux<label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <div formArrayName="niveau" [ngClass]="{ 'is-invalid': submitted && f.niveau.errors }">
           <div *ngFor="let skill of CompetenceNiveaux().controls; let skillIndex=index" style="border: red;">
-            <div [formGroupName]="skillIndex">
-              {{skillIndex}}
-              <label for="" class="form-label">Libelle</label>
-              <input type="text" formControlName="libelle" class="form-control"/>
-              <label for="" class="form-label">Action</label>
-              <textarea type="text" formControlName="action" class="form-control"></textarea>
-              <label for="">Critere Evaluation</label>
-              <textarea type="text" formControlName="critereEvaluation" class="form-control"></textarea>
+            <div [formGroupName]="skillIndex" class="row border border-1 border-info rounded-3 mb-3">
+              <label for="" class="fw-bold form-label text-center text-info">Niveau {{skillIndex}}</label>
+              <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label fw-bold">Libelle</label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="libelle" class="form-control"/>
+                </div>
+                <div *ngIf="submitted && skill.get('libelle').hasError('required')" class="input_alert">
+                  <div class="alert-danger">Libelle niveau is required</div>
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label fw-bold">Action</label>
+                <div class="col-sm-7">
+                  <textarea type="text" formControlName="action" class="form-control"></textarea>
+                </div>
+                <div *ngIf="submitted && skill.get('libelle').hasError('required')" class="input_alert">
+                  <div class="alert-danger">Action is required</div>
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label fw-bold">Critere d'Evaluation</label>
+                <div class="col-sm-7">
+                  <textarea type="text" formControlName="critereEvaluation" class="form-control"></textarea>
+                </div>
+                <div *ngIf="submitted && skill.get('libelle').hasError('required')" class="input_alert">
+                  <div class="alert-danger">Critere Evaluation  is required</div>
+                </div>
+              </div>
+
             </div>
           </div>
           <button id="add" type="button" class="btn btn-outline-primary" (click)="addCompetenceNiveau(); nbclick()">Add Niveau</button>
+          <div *ngIf="submitted && f.niveau.errors" class="input_alert">
+            <div *ngIf="f.niveau.errors.required" class="alert-danger">Remplissez tous les trois niveaux</div>
+          </div>
         </div>
-  <p>
+      </div>
+    </div>
+
+  </div>
+  <div class="row btn-sm text-center mt-3">
     <button type="submit" class="btn btn-info">Soumettre</button>
-  </p>
+  </div>
 </form>
-{{this.addForm.value | json}}

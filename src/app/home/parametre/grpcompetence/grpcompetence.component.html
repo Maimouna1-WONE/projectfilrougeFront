@@ -1,5 +1,6 @@
 <div class="row">
-    <h1 class="text-center fw-bold mb-5 form-label">Liste des Groupes de Competences</h1>
+    <h1 class="text-center fw-bold mb-3 mt-2 form-label">Liste des Groupes de Competences</h1>
+  <hr>
   <a id="add" [routerLink]="['/home/addgrpcompetence']" title="ajouter un grp de competence" style="text-decoration: none" class="mb-3"><i class="fa fa-2x fa-plus"></i></a>
   <app-grpcompetenceitem class="col-sm-4 mb-5" *ngFor="let grpcomp of grpcompetences" [grpcmp]="grpcomp"></app-grpcompetenceitem>
 </div>

@@ -1,24 +1,29 @@
-<h2 class="text-center">Ajouter un Groupe de competence</h2>
+<h2 class="text-center text-info">Ajouter un Groupe de competence</h2>
 <hr>
 <flash-messages></flash-messages>
 <form class="form-control" [formGroup]="addForm" (ngSubmit)="OnSubmit()">
   <div class="row">
-    <div class="col-12">
-      <div class="form-group">
-        <label class="fw-bold form-label">Libelle</label>
-        <input  class="form-control" type="text" formControlName="libelle">
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold" >Libelle <label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <input class="form-control" type="text" formControlName="libelle" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }"/>
+      </div>
+      <div *ngIf="submitted && f.libelle.errors" class="input_alert">
+        <div *ngIf="f.libelle.errors.required" class="alert-danger">Libelle is required</div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="form-group">
-        <label class="fw-bold form-label">Description</label>
-        <textarea class="form-control" formControlName="description"></textarea>
-
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Description<label style="color: red">*</label></label>
+      <div class="col-sm-7">
+        <textarea class="form-control" type="text" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+      </div>
+      <div *ngIf="submitted && f.description.errors" class="input_alert">
+        <div *ngIf="f.description.errors.required" class="alert-danger">Description is required</div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="form-group">
-        <label class="fw-bold form-label">Competences</label>
+    <div class="form-group row mb-3">
+      <label class="col-sm-4 col-form-label fw-bold">Competences<label style="color: red">*</label></label>
+      <div class="col-sm-7">
         <mat-form-field>
           <mat-select [formControl]="toppingsControl" multiple formControlName="competence">
             <mat-select-trigger>
@@ -32,8 +37,9 @@
             <mat-option *ngFor="let comp of competences" [value]="comp.id">{{comp.libelle}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <br/>
-        {{ toppingsControl.value | json }}
+      </div>
+      <div *ngIf="submitted && f.competence.errors" class="input_alert">
+        <div *ngIf="f.competence.errors.required" class="alert-danger">Competences is required</div>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./infopromo.component.css']
 })
 export class InfopromoComponent implements OnInit {
-  colonne: string[] = ['id', 'libelle', 'lieu', 'langue', 'description', 'reference_agate', 'date_debut', 'date_fin', 'referentiel', 'avatar', 'delete'];
+  colonne: string[] = ['libelle', 'lieu', 'langue', 'description', 'reference_agate', 'date_debut', 'date_fin', 'referentiel', 'avatar', 'action'];
   promos: Promo[];
   pageEvent: PageEvent;
   pageIndex: number;

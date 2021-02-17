@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CompetenceService} from '../../../../services/competence.service';
-import {Competence} from '../../../../models/competence';
 import {Groupecompetence} from '../../../../models/groupecompetence';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
 import {ReferentielService} from '../../../../services/referentiel.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-addreferentiel',
   templateUrl: './addreferentiel.component.html',
@@ -17,7 +16,6 @@ grpcompetence: [];
 programme: any;
   submitted = false;
   toppingsControl = new FormControl([]);
-  //toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   constructor(private grpcompetenceservice: GroupecompetenceService,
               private formbuilder: FormBuilder,
               private referentielservice: ReferentielService) { }
@@ -27,7 +25,12 @@ programme: any;
         this.grpcompetences = res;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
     this.addForm = this.formbuilder.group({
@@ -49,7 +52,6 @@ programme: any;
     const toppings = this.toppingsControl.value as string[];
     this.removeFirst(toppings, topping);
     this.toppingsControl.setValue(toppings);
-    console.log(this.toppingsControl.value); // To trigger change detection
   }
 
   private removeFirst<T>(array: T[], toRemove: T): void {
@@ -61,8 +63,6 @@ programme: any;
   // tslint:disable-next-line:typedef
   OnSubmit(){
     this.submitted = true;
-    //console.log(this.addForm.value);
-    //console.log(this.toppingsControl.value);
     const {libelle, presentation, critereevaluation, critereadmission} = this.addForm.value;
     const refer = new FormData();
     refer.append('libelle', libelle);
@@ -72,13 +72,23 @@ programme: any;
     refer.append('groupeCompetence', this.toppingsControl.value);
     refer.append('programme', this.programme);
 
-    //console.log(refer);
     this.referentielservice.addReferentiel(refer).subscribe(
       res => {
-        console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Referentiel has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
 

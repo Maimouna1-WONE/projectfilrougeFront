@@ -1,14 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Referentiel} from '../../../../models/referentiel';
 import {ReferentielService} from '../../../../services/referentiel.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Groupecompetence} from '../../../../models/groupecompetence';
+import {SafeResourceUrl} from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-referentielitem',
@@ -20,9 +18,7 @@ export class ReferentielitemComponent implements OnInit {
   @Input('referentiel') ref: Referentiel;
   pdfSrc: any;
   private fileUrl: SafeResourceUrl;
-  constructor(private referentielservice: ReferentielService,
-              private flashmessage: FlashMessagesService,
-              private sanitizer: DomSanitizer) { }
+  constructor(private referentielservice: ReferentielService) { }
 
   ngOnInit(): void {
     this.pdfSrc = this._base64ToArrayBuffer(this.ref.programme);
@@ -71,17 +67,41 @@ export class ReferentielitemComponent implements OnInit {
   }
 // tslint:disable-next-line:typedef
   deleteRef(ref: Referentiel){
-    const res = confirm('Êtes-vous sûr de vouloir supprimer?');
-    if (res) {
-      this.referentielservice.deleteOneRef(ref.id).subscribe(
-        res => {
-          this.flashmessage.show('Suppression reussie', {cssClass: 'alert-success', timeout: 1000});
-          window.location.reload();
-        },
-        error => {
-          this.flashmessage.show('error', {cssClass: 'alert-danger', timeout: 1000});
-        });
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success m-3',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.referentielservice.deleteOneRef(ref.id).subscribe();
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        );
+      }
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -114,9 +134,5 @@ export class ReferentielitemComponent implements OnInit {
     }else{
       pdfMake.createPdf(docDefinition).open();
     }
-  }
-  // tslint:disable-next-line:typedef
-  redirect(){
-    alert('ok');
   }
 }

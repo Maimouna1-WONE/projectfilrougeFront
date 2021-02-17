@@ -4,6 +4,7 @@ import {ReferentielService} from '../../../../services/referentiel.service';
 import {Referentiel} from '../../../../models/referentiel';
 import {PromoService} from '../../../../services/promo.service';
 import {Promo} from '../../../../models/promo';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addpromo',
@@ -13,7 +14,8 @@ import {Promo} from '../../../../models/promo';
 export class AddpromoComponent implements OnInit {
 
   addForm: FormGroup;
-  url: string; attente: any;
+  url = '../../../../../assets/unnamed.png';
+  attente: any;
   submitted: boolean;
   titre: string; langue: string; lieu: string;
   // tslint:disable-next-line:variable-name
@@ -36,7 +38,7 @@ export class AddpromoComponent implements OnInit {
       referentiel: ['', Validators.required],
       date_fin: ['', Validators.required],
       avatar: ['', Validators.required],
-      apprenant: this.formBuilder.array([]),
+      apprenant: this.formBuilder.array([], Validators.required),
       document: ['', Validators.required]
     });
     this.referentielservice.getAllreferentiels().subscribe(
@@ -49,11 +51,16 @@ export class AddpromoComponent implements OnInit {
     );
     this.promoservice.getAttente().subscribe(
       res => {
-        //console.log(res[0]['groupes'][0]['apprenants']);
-        this.attente = res[0]['groupes'][0]['apprenants'];
+        // console.log(res[0]['groupes'][0]['apprenants']);
+        this.attente = res[0].groupes[0].apprenants;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }
@@ -79,8 +86,6 @@ export class AddpromoComponent implements OnInit {
   // tslint:disable-next-line:typedef
   OnSubmit(){
     this.submitted = true;
-    //console.log(this.addForm.value);
-    //console.log(this.addForm.get('apprenant').value);
     const {libelle, reference_agate, referentiel, description, date_fin, langue, lieu, fabrique, apprenant, document} = this.addForm.value;
     const promo = new FormData();
     promo.append('libelle', libelle);
@@ -92,22 +97,33 @@ export class AddpromoComponent implements OnInit {
     promo.append('date_fin', date_fin);
     promo.append('langue', langue);
     promo.append('document', this.document);
-    // tslint:disable-next-line:triple-equals
+        // tslint:disable-next-line:triple-equals
     if (this.addForm.get('apprenant').value != []) {
-      for (const ap of this.addForm.get('apprenant').value) {
-        console.log(ap.app);
-        promo.append('apprenant[]', ap.app);
-      }
-    }
+          for (const ap of this.addForm.get('apprenant').value) {
+            console.log(ap.app);
+            promo.append('apprenant[]', ap.app);
+          }
+        }
     promo.append('avatar', this.avatar);
     this.promoservice.addPromo(promo).subscribe(
-      res => {
-        console.log(res);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+          res => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Promo has been saved',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          },
+          error => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Do you want to continue',
+              icon: 'error',
+              confirmButtonText: 'Yes'
+            });
+          }
+        );
   }
   // tslint:disable-next-line:typedef
   onSelectFile(event){

@@ -27,7 +27,14 @@ export class CompetenceComponent implements OnInit {
     this.grpcompetenceservice.getAllgrpcompetence().subscribe(
       res => {
         this.grpcompetences = res;
-        console.log(this.grpcompetences);
+      },
+      error => {
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }
@@ -37,6 +44,14 @@ export class CompetenceComponent implements OnInit {
     this.grpcompetenceservice.getcompetenceforGrpcompetence(this.idgc).subscribe(
       res => {
         this.competences = res['competence'];
+      },
+      error => {
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }
@@ -48,7 +63,12 @@ export class CompetenceComponent implements OnInit {
         this.text = res.libelle;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error recuperation!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
   }

@@ -4,7 +4,7 @@
   <hr>
   <button (click)="createPdf()" class="btn btn-sm btn-outline-danger mb-2" style="float:left;" text="Download PDF"><i class="fa fa-download"></i></button>
   <!--<button (click)="exportAsXLSX()" class="btn btn-sm btn-outline-success"><i class="fas fa-file-excel"></i>Download Excel</button>-->
-  <router-outlet class="shadow mt-5 bg-white rounded"></router-outlet>
+  <router-outlet class="shadow mt-5"></router-outlet>
   <mat-form-field class="px-16" style="width: 100%">
     <input matInput #filter placeholder="Search..." autocomplete="off" style="width: 100%">
     <mat-icon matSuffix>search</mat-icon>
@@ -16,7 +16,10 @@
     <ng-container matColumnDef="avatar" sticky>
       <th mat-header-cell *matHeaderCellDef><h3 class="fw-bold text-center">Avatar</h3></th>
       <td mat-cell *matCellDef="let ok" class="text-center p-3">
-        <img class="img-thumbnail" width="70" height="70" src="data:image/jpeg;base64,{{ok.avatar}}" alt="alt">
+        <img class="img-thumbnail" *ngIf="ok.avatar; else other" width="70" height="70" src="data:image/jpeg;base64,{{ok.avatar}}" alt="alt">
+        <ng-template #other>
+          <img src="https://www.showroomaudio.com/wp-content/uploads/2015/07/avatar-icon.png" class="img-thumbnail" alt="pp" width="70" height="70">
+        </ng-template>
       </td>
     </ng-container>
     <ng-container matColumnDef="profil" >

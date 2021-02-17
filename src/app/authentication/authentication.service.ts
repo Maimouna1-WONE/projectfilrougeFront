@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // @ts-ignore
 import { UserService } from '../services/user.service';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthenticationService
   infoUser: User;
   private decode = new JwtHelperService();
 
-  constructor(private http: HttpClient, private userService: UserService)
+  constructor(private http: HttpClient, private userService: UserService,
+              private router: Router)
   {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -35,10 +37,12 @@ export class AuthenticationService
     return this.http.post<any>(`/api/login_check`, { 'login' : username, 'password' : password })
       .pipe(map(token => {
         const tokenInfo = this.getInfoToken(token['token']);
-        console.log(tokenInfo);
         if (tokenInfo.archive === false) {
           localStorage.setItem('currentUser', JSON.stringify(token));
           localStorage.setItem('currentUserInfo', JSON.stringify(tokenInfo));
+          /*const en = window.atob(password);
+          console.log(en);*/
+          localStorage.setItem('password', JSON.stringify(password));
           this.currentUserSubject.next(token);
           return tokenInfo.roles[0];
         }
@@ -58,7 +62,9 @@ export class AuthenticationService
   {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentUserInfo');
+    localStorage.removeItem('password');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/login_check']);
   }
 
   getInfoToken(token: string): any

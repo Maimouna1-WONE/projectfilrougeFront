@@ -43,6 +43,7 @@
     "material-icons": "^0.5.1",
     "ng-multiselect-dropdown": "^0.2.14",
     "ng2-pdf-viewer": "^6.3.2",
+    "ngx-material-file-input": "^2.1.1",
     "ngx-pagination": "^5.0.0",
     "pdfmake": "^0.1.70",
     "primeicons": "^4.1.0",

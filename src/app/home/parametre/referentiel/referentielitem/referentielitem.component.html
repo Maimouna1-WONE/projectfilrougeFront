@@ -25,7 +25,7 @@
       </li>
       <li class="list-group-item" id="programme" *ngIf="ref.programme">
         <h5 style="color: #52B4CA ;">Programme</h5>
-        <!--<pdf-viewer [src]="pdfSrc" [original-size]="false" [show-all]="false" [page]="1"></pdf-viewer>-->
+        <pdf-viewer [src]="pdfSrc" [original-size]="false" [show-all]="false" [page]="1"></pdf-viewer>
         <button (click)="openProgramme()" class="btn btn-sm btn-outline-danger mb-2"><i class="fa fa-download"></i></button>
       </li>
       <li class="list-group-item">
@@ -38,7 +38,7 @@
             </div>
           </p-header>
           <select class="form-select">
-            <option value="{{gc.id}}" *ngFor="let gc of ref.groupeCompetence" (click)="redirect()">{{gc.libelle}}</option>
+            <option value="{{gc.id}}" *ngFor="let gc of ref.groupeCompetence" >{{gc.libelle}}</option>
           </select>
         </p-accordionTab>
       </li>

@@ -1,11 +1,64 @@
-<div class="container">
+<div class="container" id="carte" style="background-color: #f1540c; border: solid 3px #0a6aa1">
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-3 coverProfile mT20 col-xs-offset-2 dropShadow"></div>
+    <div class="col-1">
+      <img src="../../../../../assets/academy-150x150.png" style="width: 100%; height: 100%" alt="logo">
+    </div>
+    <div class="col" id="tete">
+      <p class="mt-2">REPUBLIQUE DU SENEGAL</p>
+      <p>CARTE PERSONNEL SONATEL ACADEMY</p>
+    </div>
+    <div class="col-1">
+      <img src="../../../../../assets/6380026-illustration-du-drapeau-national-du-sénégal-flottant.jpg" style="width: 100%; height: 100%" alt="logo">
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-2">
+      <img src="data:image/jpeg;base64,{{user.avatar}}" *ngIf="user.avatar; else other" class="img-thumbnail" alt="pp" style="width: 100%; height: 100%">
+      <ng-template #other>
+        <img src="https://www.showroomaudio.com/wp-content/uploads/2015/07/avatar-icon.png" class="img-thumbnail" alt="img" style="width: 120%; height: 100%;">
+      </ng-template>
+    </div>
     <div class="col">
-      <a [href]="fileUrl" download="QRCode.pdf">
-        <qrcode [qrdata]="myAngularxQrCode" [size]="256" [level]="'M'"></qrcode>
-      </a>
+      <div class="card" style="width: 100%; min-height: 100%">
+        <div class="container ">
+            <div class="form-group row">
+              <div class="col-6">
+                <label id="name-label" >Prenom</label>
+                <label for="" class="fw-bold form-label">{{user.prenom}}</label>
+              </div>
+              <div class="col">
+                <label id="name-label" >Nom</label>
+                <label for="" class="fw-bold form-label">{{user.nom}}</label>
+              </div>
+             </div>
+            <div class="form-group row">
+              <div class="col-6">
+                <label id="name-label">Sexe</label>
+                <label for="" class="fw-bold form-label">{{user.genre}}</label>
+              </div>
+              <div class="col-6">
+                <label id="name-label">Profil</label>
+                <label for="" class="fw-bold form-label">{{user.profil.libelle}}</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label id="name-label">Adresse</label>
+              <label for="" class="fw-bold form-label">{{user.adresse}}</label>
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card" style="width: 100%; height: 100%">
+        <qrcode [qrdata]="myAngularxQrCode"></qrcode>
+      </div>
     </div>
   </div>
 </div>
+<!--<button (click)="createPdfdetail()" class="btn btn-sm btn-outline-danger mb-2" style="float:left;" text="Download PDF"><i class="fa fa-download"></i></button>-->
+<!--<a [href]="fileUrl" download="QRCode.pdf">
+  <qrcode [qrdata]="myAngularxQrCode" [level]="'M'"></qrcode>
+</a>-->
+

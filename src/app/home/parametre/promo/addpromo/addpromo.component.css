@@ -1,0 +1,123 @@
+
+ul {
+  list-style-type: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  width: 100%;
+  display: block;
+  position: relative;
+  border: 1px solid #179eb0;
+}
+ul li input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+ul li label {
+  display: block;
+  position: relative;
+  padding: 1em 2em;
+  font-size: 1em;
+  cursor:pointer;
+  z-index: 5;
+  transition: all .25s linear;
+}
+ul li:hover label {
+  color: darkgrey;
+}
+ul li .check {
+  display: block;
+  position: absolute;
+  border: 4px solid #eee;
+  border-radius: 100%;
+  height: 24px;
+  width: 25px;
+  top: calc(50% - 14px);
+  z-index: 5;
+  transition: border .25s linear;
+  cursor:pointer;
+}
+ul li:hover .check {
+  border: 4px solid #fff;
+}
+ul li .check::before {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 100%;
+  height: 16px;
+  width: 16px;
+  top: calc(50% - 8px);
+  left: calc(50% - 8px);
+  margin: auto;
+  transition: background .25s linear;
+}
+input[type=radio]:checked ~ .check {
+  border: 5px solid #179eb0;
+}
+input[type=radio]:checked ~ .check::before {
+  background: #179eb0;
+}
+input[type=radio]:checked ~ label {
+  color: #179eb0;
+}
+
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.file-input label {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: #2bc4c4;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}
+.vl {
+  border-left: 3px solid #179eb0;
+  height: 100%;
+}
+
+.file1 {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.file1-input label {
+  display: block;
+  position: relative;
+  width: 20%;
+  height: 40px;
+  border-radius: 25px;
+  background: green;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+

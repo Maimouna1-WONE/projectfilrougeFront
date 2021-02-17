@@ -4,7 +4,6 @@ import {ActivatedRoute, Data} from '@angular/router';
 import {Referentiel} from '../../../../models/referentiel';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
 import {Groupecompetence} from '../../../../models/groupecompetence';
-import {FlashMessagesService} from 'angular2-flash-messages';
 import {ReferentielService} from '../../../../services/referentiel.service';
 import Swal from 'sweetalert2';
 
@@ -24,7 +23,6 @@ export class UpdatereferentielComponent implements OnInit {
   constructor(private grpcompetenceservice: GroupecompetenceService,
               private formbuilder: FormBuilder,
               private route: ActivatedRoute,
-              private flashmessage: FlashMessagesService,
               private referentielservice: ReferentielService) { }
 
   ngOnInit(): void {
@@ -42,19 +40,23 @@ export class UpdatereferentielComponent implements OnInit {
         this.grpcompetences = res;
       },
       error => {
-        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Do you want to continue',
+          icon: 'error',
+          confirmButtonText: 'Yes'
+        });
       }
     );
     this.route.data.subscribe(
       (data: Data) => {
         this.cour = data.referentiel;
-        console.log(this.cour);
       }
     );
     this.addForm = this.formbuilder.group({
       libelle: ['', Validators.required],
       presentation: ['', Validators.required],
-      grpcompetence: ['', Validators.required],
+      grpcompetence: [[], Validators.required],
       programme: [''],
       critereevaluation: ['', Validators.required],
       critereadmission: ['', Validators.required]
@@ -72,7 +74,6 @@ export class UpdatereferentielComponent implements OnInit {
     for (const c of this.cour.groupeCompetence){
       this.selectedItems.push(c);
     }
-    console.log(this.selectedItems);
   }
   // tslint:disable-next-line:typedef
   onItemSelect(item: any){
@@ -118,7 +119,7 @@ export class UpdatereferentielComponent implements OnInit {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Profil has been saved',
+          title: 'Referentiel has been updated',
           showConfirmButton: false,
           timer: 1500
         });

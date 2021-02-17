@@ -27,10 +27,6 @@ export class AddprofilsortieComponent implements OnInit {
       if (result.value) {
         const profil = new Profil(result.value);
         this.profilsortieservice.addProfilsortie(profil).subscribe();
-        /*Swal.fire({
-          title: 'Poof! Your profil has been added!',
-          icon: 'success',
-        });*/
         Swal.fire({
           position: 'top-end',
           icon: 'success',
