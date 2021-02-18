@@ -1,6 +1,6 @@
 <h2 class="text-center text-info">Ajouter un Groupe de competence</h2>
 <hr>
-<flash-messages></flash-messages>
+
 <form class="form-control" [formGroup]="addForm" (ngSubmit)="OnSubmit()">
   <div class="row">
     <div class="form-group row mb-3">
@@ -37,6 +37,13 @@
             <mat-option *ngFor="let comp of competences" [value]="comp.id">{{comp.libelle}}</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <div class="mb-3">
+          <div #target></div>
+        </div>
+        <button type="button" (click)="addnew()">Load Component</button>
+
+
       </div>
       <div *ngIf="submitted && f.competence.errors" class="input_alert">
         <div *ngIf="f.competence.errors.required" class="alert-danger">Competences is required</div>
@@ -47,4 +54,3 @@
     <button type="submit" class="btn btn-info">Soumettre</button>
   </div>
 </form>
-

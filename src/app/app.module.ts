@@ -154,6 +154,7 @@ import { UpdatepasswordComponent } from './home/updatepassword/updatepassword.co
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddcompetenceComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Injector, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CompetenceService} from '../../../../services/competence.service';
 import {GroupecompetenceService} from '../../../../services/groupecompetence.service';
 import {Groupecompetence} from '../../../../models/groupecompetence';
 import Swal from 'sweetalert2';
+import {RecupereService} from '../../../../services/recupere.service';
 
 @Component({
   selector: 'app-addcompetence',
@@ -16,9 +17,12 @@ submitted = false;
 nb = 0;
 grpcompetences: Groupecompetence[];
   toppingsControl = new FormControl([]);
+  @Output() newItemEvent = new EventEmitter();
+  // tslint:disable-next-line:typedef
   constructor(private fb: FormBuilder,
               private competenceservice: CompetenceService,
-              private grpcompetenceservice: GroupecompetenceService) {
+              private grpcompetenceservice: GroupecompetenceService,
+              private recupservice: RecupereService) {
     this.addForm = this.fb.group({
       libelle: ['', Validators.required],
       description: ['', Validators.required],
@@ -105,10 +109,11 @@ grpcompetences: Groupecompetence[];
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'User has been saved',
+          title: 'Competence has been saved',
           showConfirmButton: false,
           timer: 1500
         });
+        this.recupservice.recup = res;
       },
       error => {
         Swal.fire({
